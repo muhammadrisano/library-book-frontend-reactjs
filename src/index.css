@@ -11,3 +11,50 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+
+.headernav{
+  height: 80px;
+  box-shadow: 20px 0 20px 10px rgba(0, 0, 0, 1);
+}
+.headernav .brand{
+  font-size: 30px;
+}
+.menusearch{
+  margin-top: 100px;
+}
+#search{
+height: 60px;
+border-radius: 40px;
+box-shadow: 4px 4px 4px rgba(0, 0, 0, .75);
+font-size: 20px;
+}
+.button-add{
+  color:white;
+ 
+  height: 50px;
+  font-weight: bold;
+ 
+
+}
+.button-modal{
+  text-align: right;
+  margin:50px 170px;
+} 
+.button-modal button{
+  background-color: rgb(200, 202, 44);
+  border-color: white;
+  font-weight: bold;
+}
+.button-modal button:hover{
+  background-color: rgb(225, 236, 72);
+  border-color: white;
+}
+.cardbuku{
+  border-top-left-radius: 20px !important;
+  border-top-right-radius: 20px !important;
+  box-shadow: 3px 3px 3px rgba(0, 0, 0, .75);
+}
+.cardimg{
+  border-radius: 20px !important;
+}
