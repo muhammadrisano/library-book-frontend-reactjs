@@ -7,53 +7,23 @@ export default class Listbuku extends Component {
             <Row>
                 <Col md={{ size: 10, offset: 1 }}>
                     <Row>
-                        <Col md={3} className="p-4">
+                        {this.props.data.map((item, index) =>
 
-                            <Card className="cardbuku">
-                                <a href="http://">
-                                    <CardImg top width="100%" src="http://localhost/buku/BOOK-COVER-STELLA-768x994.jpg" alt="Card image cap" className="cardimg" />
-                                </a>
-                                <CardBody>
-                                    <CardTitle>Setella Kalisa</CardTitle>
+                            <Col md={3} className="p-4">
 
-                                </CardBody>
-                            </Card>
+                                <Card key={index} className="cardbuku">
+                                    <a href="http://">
+                                        <CardImg top width="100%" src={item.url} alt="Card image cap" className="cardimg" />
+                                    </a>
+                                    <CardBody>
+                                        <CardTitle>{item.title}</CardTitle>
 
-                        </Col>
+                                    </CardBody>
+                                </Card>
 
-                        <Col md={3} className="p-4">
+                            </Col>
+                        )}
 
-                            <Card className="cardbuku">
-                                <CardImg top width="100%" src="http://localhost/buku/tamara.jpg" alt="Card image cap" className="cardimg" />
-                                <CardBody>
-                                    <CardTitle>Setella Kalisa</CardTitle>
-                                </CardBody>
-                            </Card>
-
-                        </Col>
-
-                        <Col md={3} className="p-4">
-
-                            <Card className="cardbuku">
-                                <CardImg top width="100%" src="http://localhost/buku/felix-cover-11-science.jpg" alt="Card image cap" className="cardimg" />
-                                <CardBody>
-
-                                    <CardTitle>Setella Kalisa</CardTitle>
-                                </CardBody>
-                            </Card>
-
-                        </Col>
-
-                        <Col md={3} className="p-4">
-
-                            <Card className="cardbuku">
-                                <CardImg top width="100%" src="http://localhost/buku/vindy-cover-book.jpg" alt="Card image cap" className="cardimg" />
-                                <CardBody>
-                                    <CardTitle>Setella Kalisa</CardTitle>
-                                </CardBody>
-                            </Card>
-
-                        </Col>
                     </Row>
                 </Col >
 

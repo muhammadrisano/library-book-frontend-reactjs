@@ -51,10 +51,18 @@ font-size: 20px;
   border-color: white;
 }
 .cardbuku{
-  border-top-left-radius: 20px !important;
-  border-top-right-radius: 20px !important;
+border-radius: 20px !important;
   box-shadow: 3px 3px 3px rgba(0, 0, 0, .75);
+  transition: .25s;
 }
 .cardimg{
   border-radius: 20px !important;
+}
+.cardbuku:hover{
+transform: scale(1.2,1.2);
+/* box-shadow: 3px 3px 3px rgba(200, 202, 44, .75);
+border: 1px solid gray; */
+filter: brightness(1.1) contrast(1.1)
+
+
 }
