@@ -1,8 +1,24 @@
 import React, { Component } from 'react';
 import { Card, CardImg, CardBody, CardText, Row, Col, CardTitle } from 'reactstrap';
+import { BrowserRouter, Link } from 'react-router-dom'
 export default class Listbuku extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            modal: false
+        };
+
+        this.toggle = this.toggle.bind(this);
+    }
+
+    toggle() {
+        this.setState(prevState => ({
+            modal: !prevState.modal
+        }));
+    }
 
     render() {
+
         return (
             <Row>
                 <Col md={{ size: 10, offset: 1 }}>
@@ -12,9 +28,9 @@ export default class Listbuku extends Component {
                             <Col md={3} className="p-4">
 
                                 <Card key={index} className="cardbuku">
-                                    <a href="http://">
+                                    <Link to={'/books/' + item.id}>
                                         <CardImg top width="100%" src={item.url} alt="Card image cap" className="cardimg" />
-                                    </a>
+                                    </Link>
                                     <CardBody>
                                         <CardTitle>{item.title}</CardTitle>
 
@@ -22,12 +38,16 @@ export default class Listbuku extends Component {
                                 </Card>
 
                             </Col>
+
                         )}
 
                     </Row>
                 </Col >
-
             </Row >
+
+
+
+        
         )
     }
 }
