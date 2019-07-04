@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Card, CardImg, CardBody, CardText, Row, Col, CardTitle, Button } from 'reactstrap';
-import { BrowserRouter, Link } from 'react-router-dom'
+import { BrowserRouter, Link } from 'react-router-dom';
+import swal from 'sweetalert';
 export default class Listbuku extends Component {
     constructor(props) {
         super(props);
@@ -16,9 +17,23 @@ export default class Listbuku extends Component {
             modal: !prevState.modal
         }));
     }
+    deleteBook() {
+
+        swal({
+            title: "Delete !",
+            text: "Deleted Success !!",
+            icon: "success",
+            button: "oke"
+
+        });
+
+        this.state.redirect = true;
+
+    }
+
 
     render() {
-
+        console.log(this.props);
         return (
             <Row>
                 <Col md={{ size: 10, offset: 1 }}>
@@ -29,16 +44,14 @@ export default class Listbuku extends Component {
 
                                 <Card key={index} className="cardbuku">
                                     <Button close className="btn-close" />
-                                    <Link to={'/books/' + item.id}>
+                                    <Link to={'/books/' + index}>
                                         <CardImg top width="100%" src={item.url} alt="Card image cap" className="cardimg" />
                                     </Link>
                                     <CardBody>
                                         <CardTitle>{item.title}</CardTitle>
                                     </CardBody>
                                 </Card>
-
                             </Col>
-
                         )}
 
                     </Row>

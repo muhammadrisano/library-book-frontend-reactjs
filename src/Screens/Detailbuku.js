@@ -29,19 +29,17 @@ class Detailbuku extends Component {
         }));
     }
     componentWillMount() {
-        Data.forEach(element => {
-            if (element.id == this.state.id_params) {
-                console.log(element)
-                this.setState({
-                    id: element.id,
-                    title: element.title,
-                    url: element.url,
-                    description: element.description,
-                    created_at: element.created_at,
-                    updated_at: element.updated_at
-                })
-            }
-        });
+        let dataBook = Data[this.state.id_params];
+        this.setState({
+            id: dataBook.id,
+            title: dataBook.title,
+            url: dataBook.url,
+            description: dataBook.description,
+            created_at: dataBook.created_at,
+            updated_at: dataBook.updated_at
+        })
+
+
     }
     deleteBook() {
 
@@ -105,7 +103,7 @@ class Detailbuku extends Component {
 
                 <Jumbotron className="p-0 header-book">
                     <div className="button-detail">
-                        <a href="#" onClick={this.toggle}><h3>Edit</h3></a>    <Link to={'/books/?delete=' + this.state.id} onClick={() => { if (window.confirm('Are you sure you wish to delete this item?')) this.deleteBook() }}><h3>Delete</h3></Link>
+                        <a href="#" onClick={this.toggle}><h3>Edit</h3></a>    <Link to={'/books/?delete=' + this.state.id_params} onClick={() => { if (window.confirm('Are you sure you wish to delete this item?')) this.deleteBook() }}><h3>Delete</h3></Link>
                     </div>
                     <div className="header-book">
                         <img src={this.state.url} width="100%" alt="" />
@@ -117,6 +115,7 @@ class Detailbuku extends Component {
                 </div>
                 <Container className="body-detailbook">
                     <h2>{this.state.title}</h2>
+                    <h3 className="tgl-detail">{this.state.created_at}</h3>
                     <p>
                         {this.state.description}
                     </p>
