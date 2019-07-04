@@ -8,10 +8,9 @@ import {
 import Search from '../Component/Search';
 
 import Listbuku from '../Component/Listbuku';
-import Data from '../Helpers/Datadummy'
-import { BrowserRouter, Switch, Route, Link } from 'react-router-dom'
-import { tsThisType } from '@babel/types';
-
+import Data from '../Database/Datadummy'
+import swal from 'sweetalert';
+import queryString from 'query-string';
 
 
 class Books extends Component {
@@ -51,7 +50,13 @@ class Books extends Component {
             inputUrl: '',
             inputDescription: ''
         })
+        swal({
+            title: "Insert!",
+            text: "Insert Success !!",
+            icon: "success",
+            button: "oke"
 
+        })
     }
     changeUrl = (event) => {
         this.setState({ inputUrl: event.target.value })
@@ -68,7 +73,19 @@ class Books extends Component {
 
     }
 
+    componentDidMount() {
+        const query = queryString.parse(this.props.location.search);
+        if (query.delete) {
+            let dataBook = this.state.data;
+            dataBook.splice(query.delete, 1);
+            console.log(dataBook);
+            this.setState({
+                data: dataBook
+            })
 
+
+        }
+    }
 
     render() {
         return (

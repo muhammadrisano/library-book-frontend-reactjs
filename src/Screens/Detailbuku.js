@@ -1,16 +1,24 @@
 import React, { Component } from 'react';
 import { Jumbotron, Button, Container, Modal, ModalHeader, ModalBody, ModalFooter, Form, FormGroup, Label, Col, Input } from 'reactstrap';
-import { BrowserRouter, Redirect } from 'react-router-dom';
 import './style.css';
-import Data from '../Helpers/Datadummy'
+import Data from '../Database/Datadummy';
+import swal from 'sweetalert';
+import { Link } from 'react-router-dom';
+
 class Detailbuku extends Component {
     constructor(props) {
         super(props);
         this.state = {
             data: {},
-            id: props.match.params.idbook,
+            id_params: props.match.params.idbook,
             modal: false,
-            redirect: false
+            redirect: false,
+            id: '',
+            title: '',
+            url: '',
+            description: '',
+            created_at: '',
+            updated_at: ''
 
         }
         this.toggle = this.toggle.bind(this);
@@ -22,72 +30,131 @@ class Detailbuku extends Component {
     }
     componentWillMount() {
         Data.forEach(element => {
-            if (element.id == this.state.id) {
-                this.setState({ data: element })
+            if (element.id == this.state.id_params) {
+                console.log(element)
+                this.setState({
+                    id: element.id,
+                    title: element.title,
+                    url: element.url,
+                    description: element.description,
+                    created_at: element.created_at,
+                    updated_at: element.updated_at
+                })
             }
         });
     }
     deleteBook() {
-        alert('item Deleted Success !!')
+
+        swal({
+            title: "Delete !",
+            text: "Deleted Success !!",
+            icon: "success",
+            button: "oke"
+
+        });
 
         this.state.redirect = true;
+
     }
 
+    changeUrl = (event) => {
+        this.setState({ url: event.target.value })
+    }
+    changeTitle = (event) => {
+        this.setState({ title: event.target.value })
+
+    }
+    changeDescription = (event) => {
+        this.setState({ description: event.target.value })
+    }
+
+    updateFinish = (e) => {
+        e.preventDefault();
+        swal({
+            title: "Update!",
+            text: "Update Success !!",
+            icon: "success",
+            button: "oke"
+
+        })
+    }
+
+    prosesEdit = (event) => {
+        event.preventDefault()
+        let stateData = this.state.data
+        let data = {
+            id: 10,
+            title: this.state.inputTitle,
+            description: this.state.inputDescription,
+            url: this.state.inputUrl,
+            created_at: Date(),
+            updated_at: Date()
+        }
+        stateData = [...stateData, data]
+        this.setState({
+            data: stateData,
+            inputTitle: '',
+            inputUrl: '',
+            inputDescription: ''
+        })
+    }
     render() {
-        console.log(this.state.data)
+
         return (
             <div>
+
                 <Jumbotron className="p-0 header-book">
                     <div className="button-detail">
-                        <a href="#" onClick={this.toggle}><h3>Edit</h3></a><a href="#" onClick={() => { if (window.confirm('Are you sure you wish to delete this item?')) this.deleteBook() }}><h3>Delete</h3></a>
+                        <a href="#" onClick={this.toggle}><h3>Edit</h3></a>    <Link to={'/books/?delete=' + this.state.id} onClick={() => { if (window.confirm('Are you sure you wish to delete this item?')) this.deleteBook() }}><h3>Delete</h3></Link>
                     </div>
                     <div className="header-book">
-                        <img src={this.state.data.url} width="100%" alt="" />
+                        <img src={this.state.url} width="100%" alt="" />
                     </div>
 
                 </Jumbotron>
                 <div className="book-child">
-                    <img src={this.state.data.url} alt="" width="150px" className="img-thumbnail" />
+                    <img src={this.state.url} alt="" width="150px" className="img-thumbnail" />
                 </div>
                 <Container className="body-detailbook">
-                    <h2>{this.state.data.title}</h2>
+                    <h2>{this.state.title}</h2>
                     <p>
-                        {this.state.data.description}
+                        {this.state.description}
                     </p>
                 </Container>
 
-                {/* modal */}
                 <div>
 
                     <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
-                        <ModalHeader toggle={this.toggle}>Modal title</ModalHeader>
-                        <ModalBody>
-                            <Form>
+                        <Form onSubmit={this.updateFinish}>
+                            <ModalHeader toggle={this.toggle}>Modal title</ModalHeader>
+                            <ModalBody>
+
                                 <FormGroup row>
                                     <Label for="exampleEmail" sm={3} size="lg">Url</Label>
                                     <Col sm={9}>
-                                        <Input type="text" name="urlImage" id="ulrImage" placeholder="Url Image.." bsSize="lg" value={this.state.data.url} />
+                                        <Input type="text" name="urlImage" id="ulrImage" placeholder="Url Image.." bsSize="lg" value={this.state.url} onChange={this.changeUrl} />
                                     </Col>
                                 </FormGroup>
                                 <FormGroup row>
                                     <Label for="title" sm={3} size="lg">Title</Label>
                                     <Col sm={9}>
-                                        <Input type="text" name="title" id="title" bsSize="lg" value={this.state.data.title} />
+                                        <Input type="text" name="title" id="title" bsSize="lg" value={this.state.title} onChange={this.changeTitle} />
                                     </Col>
                                 </FormGroup>
                                 <FormGroup row>
                                     <Label for="exampleEmail" sm={3} size="lg">Description</Label>
                                     <Col sm={9}>
 
-                                        <Input type="textarea" name="text" id="exampleText" value={this.state.data.description} />
+                                        <Input type="textarea" name="text" id="exampleText" value={this.state.description} onChange={this.changeDescription} />
                                     </Col>
                                 </FormGroup>
-                            </Form>
-                        </ModalBody>
-                        <ModalFooter>
-                            <Button color="primary" onClick={this.toggle}>Edit Book</Button>{' '}
-                            <Button color="secondary" onClick={this.toggle}>Cancel</Button>
-                        </ModalFooter>
+
+                            </ModalBody>
+                            <ModalFooter>
+                                <Button type="submit" color="primary" onClick={this.toggle}>Finish</Button>{' '}
+
+                            </ModalFooter>
+                        </Form>
                     </Modal>
                 </div>
             </div >

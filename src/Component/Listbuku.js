@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Card, CardImg, CardBody, CardText, Row, Col, CardTitle } from 'reactstrap';
+import { Card, CardImg, CardBody, CardText, Row, Col, CardTitle, Button } from 'reactstrap';
 import { BrowserRouter, Link } from 'react-router-dom'
 export default class Listbuku extends Component {
     constructor(props) {
@@ -28,12 +28,12 @@ export default class Listbuku extends Component {
                             <Col md={3} className="p-4">
 
                                 <Card key={index} className="cardbuku">
+                                    <Button close className="btn-close" />
                                     <Link to={'/books/' + item.id}>
                                         <CardImg top width="100%" src={item.url} alt="Card image cap" className="cardimg" />
                                     </Link>
                                     <CardBody>
                                         <CardTitle>{item.title}</CardTitle>
-
                                     </CardBody>
                                 </Card>
 
@@ -47,7 +47,7 @@ export default class Listbuku extends Component {
 
 
 
-        
+
         )
     }
 }
