@@ -4,7 +4,11 @@ import books from './Screens/Books';
 import detailbook from './Screens/Detailbuku';
 
 function NoMacth() {
-  return <h2>404, Halama tidak ditemukan</h2>
+  return (
+    <div>
+      <h2>404, Halama tidak ditemukan, route yang benar http://localhost:3000/books</h2>
+    </div>
+  )
 }
 
 class App extends Component {

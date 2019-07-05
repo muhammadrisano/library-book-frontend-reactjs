@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { Card, CardImg, CardBody, CardText, Row, Col, CardTitle, Button } from 'reactstrap';
-import { BrowserRouter, Link } from 'react-router-dom';
+import { Card, CardImg, CardBody, Row, Col, CardTitle, Button } from 'reactstrap';
+import { Link } from 'react-router-dom';
 import swal from 'sweetalert';
 export default class Listbuku extends Component {
     constructor(props) {
