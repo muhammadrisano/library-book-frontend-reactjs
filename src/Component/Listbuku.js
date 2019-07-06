@@ -47,7 +47,7 @@ export default class Listbuku extends Component {
                                     <Link to={'/books/' + index}>
                                         <CardImg top width="100%" src={item.url} alt="Card image cap" className="cardimg" />
                                     </Link>
-                                    <CardBody>
+                                    <CardBody className="text-center">
                                         <CardTitle>{item.title}</CardTitle>
                                     </CardBody>
                                 </Card>

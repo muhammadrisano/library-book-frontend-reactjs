@@ -36,7 +36,7 @@ class Books extends Component {
         event.preventDefault()
         let stateData = this.state.data
         let data = {
-            id: 10,
+
             title: this.state.inputTitle,
             description: this.state.inputDescription,
             url: this.state.inputUrl,
@@ -82,8 +82,6 @@ class Books extends Component {
             this.setState({
                 data: dataBook
             })
-
-
         }
     }
 
@@ -102,7 +100,6 @@ class Books extends Component {
                             <Form onSubmit={this.prosesInput}>
                                 <ModalHeader toggle={this.toggle}><b>Add Data</b></ModalHeader>
                                 <ModalBody>
-
                                     <FormGroup row>
                                         <Label for="exampleEmail" sm={3} size="lg">Url Image</Label>
                                         <Col sm={9}>
@@ -142,7 +139,4 @@ class Books extends Component {
         )
     }
 }
-
-
-
 export default Books;

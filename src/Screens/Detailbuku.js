@@ -81,7 +81,6 @@ class Detailbuku extends Component {
         event.preventDefault()
         let stateData = this.state.data
         let data = {
-            id: 10,
             title: this.state.inputTitle,
             description: this.state.inputDescription,
             url: this.state.inputUrl,
