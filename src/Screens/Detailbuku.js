@@ -54,7 +54,7 @@ class Detailbuku extends Component {
         this.state.redirect = true;
 
     }
-
+    // tes
     changeUrl = (event) => {
         this.setState({ url: event.target.value })
     }
