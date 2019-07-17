@@ -13,7 +13,7 @@ function NoMacth() {
 }
 const globalState = {
   books: [],
-  jumlah: 1
+  jumlahbuku: 0
 }
 
 // Reducer
@@ -23,7 +23,8 @@ const rootReducer = (state = globalState, action) => {
     case 'GET_ALL':
       return {
         ...state,
-        books: action.dataBook
+        books: action.dataBook.result,
+        jumlahbuku: action.dataBook.jumlah
       }
 
     case 'SEARCH_BOOK':
@@ -31,7 +32,11 @@ const rootReducer = (state = globalState, action) => {
         ...state,
         books: action.search
       }
-      break;
+    case 'PAGE_LIST':
+      return {
+        ...state,
+        books: action.dataPage.result
+      }
     default:
       return state
       break;

@@ -8,6 +8,7 @@ import {
 import Search from '../Component/Search';
 
 import Listbuku from '../Component/Listbuku';
+import Paging from '../Component/Paging';
 import Data from '../Database/Datadummy'
 import swal from 'sweetalert';
 import queryString from 'query-string';
@@ -67,12 +68,7 @@ class Books extends Component {
             [e.target.name]: e.target.value
         })
     }
-    tesaja = () => {
-        if (this.props.books.length < 1) {
-            return <h2>data tidak ditemukan</h2>
-        }
 
-    }
     // changeUrl = (event) => {
     //     this.setState({ inputUrl: event.target.value })
 
@@ -90,20 +86,9 @@ class Books extends Component {
 
     async componentDidMount() {
 
-        await axios.get('http://localhost:4000/books')
+        await axios.get('http://localhost:4000/books?page=1')
             .then(response =>
-                //     this.setState({
-                //         test: response.data.result
-                //     })
-                // console.log(response.data.result.length)
-                this.props.getBooks(response.data.result)
-
-                // console.log(response.data.result)
-                // response.data.result.map((dat, index) => {
-                //     return (
-                //         console.log(dat)
-                //     )
-                // })
+                this.props.getBooks(response.data)
             )
 
         // this.setState({
@@ -123,7 +108,7 @@ class Books extends Component {
     }
 
     render() {
-
+        console.log(this.props.jumlahbuku);
         return (
 
             <div>
@@ -190,6 +175,7 @@ class Books extends Component {
 
 
                     <Listbuku />
+                    <Paging />
                 </Container>
             </div>
         )
@@ -198,7 +184,8 @@ class Books extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        books: state.books
+        books: state.books,
+        jumlahbuku: state.jumlahbuku
     }
 
 }
