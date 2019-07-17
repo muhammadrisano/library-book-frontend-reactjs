@@ -18,14 +18,32 @@ const globalState = {
 
 // Reducer
 const rootReducer = (state = globalState, action) => {
-  if (action.type === 'GET_ALL') {
-    return {
-      ...state,
-      books: action.dataBook
-    }
-  }
 
-  return state
+  switch (action.type) {
+    case 'GET_ALL':
+      return {
+        ...state,
+        books: action.dataBook
+      }
+
+    case 'SEARCH_BOOK':
+      return {
+        ...state,
+        books: action.search
+      }
+      break;
+    default:
+      return state
+      break;
+  }
+  // if (action.type === 'GET_ALL') {
+  //   return {
+  //     ...state,
+  //     books: action.dataBook
+  //   }
+  // }
+
+
 }
 
 const storeRedux = createStore(rootReducer);
