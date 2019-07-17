@@ -40,9 +40,9 @@ class Books extends Component {
     }
     prosesInput = async (event) => {
         event.preventDefault()
-        console.log(this.state)      
+        console.log(this.state)
 
-        await axios.post("http://localhost:4000/books",{
+        await axios.post("http://localhost:4000/books", {
             name: this.state.name,
             image: this.state.image,
             writer: this.state.writer,
@@ -50,10 +50,10 @@ class Books extends Component {
             location: this.state.location,
             id_category: this.state.id_category,
         })
-        .then(response=>
-            console.log(response.data)
+            .then(response =>
+                console.log(response.data)
             )
-            this.props.history.push('/')
+        this.props.history.push('/')
         // swal({
         //     title: "Insert!",
         //     text: "Insert Success !!",
@@ -66,6 +66,12 @@ class Books extends Component {
         this.setState({
             [e.target.name]: e.target.value
         })
+    }
+    tesaja = () => {
+        if (this.props.books.length < 1) {
+            return <h2>data tidak ditemukan</h2>
+        }
+
     }
     // changeUrl = (event) => {
     //     this.setState({ inputUrl: event.target.value })
@@ -89,8 +95,9 @@ class Books extends Component {
                 //     this.setState({
                 //         test: response.data.result
                 //     })
-
+                // console.log(response.data.result.length)
                 this.props.getBooks(response.data.result)
+
                 // console.log(response.data.result)
                 // response.data.result.map((dat, index) => {
                 //     return (
