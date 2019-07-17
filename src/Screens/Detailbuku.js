@@ -175,7 +175,7 @@ class Detailbuku extends Component {
                 </Jumbotron>
                 <div className="book-child">
                     <img src={this.state.image} alt="" width="150px" className="img-thumbnail" />
-                </div>
+                </div>delete
                 <Container className="body-detailbook">
                     <h2>{this.state.name}</h2>
                     <h3 className="tgl-detail">{this.state.created_at}</h3>
