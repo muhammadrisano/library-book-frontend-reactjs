@@ -9,7 +9,6 @@ class Listbuku extends Component {
         super(props);
         this.state = {
             modal: false,
-            books: []
         };
 
         this.toggle = this.toggle.bind(this);
@@ -50,10 +49,10 @@ class Listbuku extends Component {
 
                 <Col md={3} className="p-4">
 
-                    <Card key={index} className="cardbuku">
+                    <Card key={item.id_book} className="cardbuku">
                         <Button close className="btn-close" />
-                        <Link to={'/books/' + index}>
-                            <CardImg top width="100%" src="" alt="Card image cap" className="cardimg" />
+                        <Link to={'/books/' + item.id_book}>
+                            <CardImg top width="100%" src={item.image} alt="Card image cap" className="cardimg" />
                         </Link>
                         <CardBody className="text-center">
                             <CardTitle>{item.name}</CardTitle>
@@ -63,7 +62,7 @@ class Listbuku extends Component {
             )
         })
 
-        console.log(this.state.books);
+
 
 
         return (
