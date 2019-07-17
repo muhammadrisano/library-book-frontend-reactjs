@@ -2,11 +2,14 @@ import React, { Component } from 'react';
 import { Card, CardImg, CardBody, Row, Col, CardTitle, Button } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import swal from 'sweetalert';
-export default class Listbuku extends Component {
+import { connect } from 'react-redux';
+
+class Listbuku extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            modal: false
+            modal: false,
+            books: []
         };
 
         this.toggle = this.toggle.bind(this);
@@ -17,43 +20,57 @@ export default class Listbuku extends Component {
             modal: !prevState.modal
         }));
     }
-    deleteBook() {
+    // deleteBook() {
 
-        swal({
-            title: "Delete !",
-            text: "Deleted Success !!",
-            icon: "success",
-            button: "oke"
+    //     swal({
+    //         title: "Delete !",
+    //         text: "Deleted Success !!",
+    //         icon: "success",
+    //         button: "oke"
 
-        });
+    //     });
 
-        this.state.redirect = true;
+    //     this.state.redirect = true;
+
+    // }
+
+    componentDidMount() {
+        this.setState({
+            books: this.props.books
+        })
 
     }
 
 
+
     render() {
-        console.log(this.props);
+
+        let buku = this.props.books.map((item, index) => {
+            return (
+
+                <Col md={3} className="p-4">
+
+                    <Card key={index} className="cardbuku">
+                        <Button close className="btn-close" />
+                        <Link to={'/books/' + index}>
+                            <CardImg top width="100%" src="" alt="Card image cap" className="cardimg" />
+                        </Link>
+                        <CardBody className="text-center">
+                            <CardTitle>{item.name}</CardTitle>
+                        </CardBody>
+                    </Card>
+                </Col>
+            )
+        })
+
+        console.log(this.state.books);
+
+
         return (
             <Row>
                 <Col md={{ size: 10, offset: 1 }}>
                     <Row>
-                        {this.props.data.map((item, index) =>
-
-                            <Col md={3} className="p-4">
-
-                                <Card key={index} className="cardbuku">
-                                    <Button close className="btn-close" />
-                                    <Link to={'/books/' + index}>
-                                        <CardImg top width="100%" src={item.url} alt="Card image cap" className="cardimg" />
-                                    </Link>
-                                    <CardBody className="text-center">
-                                        <CardTitle>{item.title}</CardTitle>
-                                    </CardBody>
-                                </Card>
-                            </Col>
-                        )}
-
+                        {buku}
                     </Row>
                 </Col >
             </Row >
@@ -64,3 +81,11 @@ export default class Listbuku extends Component {
         )
     }
 }
+const mapStateToProps = (state) => {
+    return {
+        books: state.books,
+        jumlah: state.jumlah
+    }
+}
+
+export default connect(mapStateToProps)(Listbuku)

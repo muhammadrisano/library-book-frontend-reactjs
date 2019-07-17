@@ -11,6 +11,8 @@ import Listbuku from '../Component/Listbuku';
 import Data from '../Database/Datadummy'
 import swal from 'sweetalert';
 import queryString from 'query-string';
+import { connect } from 'react-redux'
+import axios from 'axios'
 
 
 class Books extends Component {
@@ -22,7 +24,9 @@ class Books extends Component {
             modal: false,
             inputUrl: '',
             inputTitle: '',
-            inputDescription: ''
+            inputDescription: '',
+            bookspage: [],
+            books: []
         }
         this.toggle = this.toggle.bind(this);
     }
@@ -73,19 +77,43 @@ class Books extends Component {
 
     }
 
-    componentDidMount() {
-        const query = queryString.parse(this.props.location.search);
-        if (query.delete) {
-            let dataBook = this.state.data;
-            dataBook.splice(query.delete, 1);
-            console.log(dataBook);
-            this.setState({
-                data: dataBook
-            })
-        }
+    async componentDidMount() {
+
+        await axios.get('http://localhost:4000/books')
+            .then(response =>
+                //     this.setState({
+                //         test: response.data.result
+                //     })
+
+                this.props.getBooks(response.data.result)
+                // console.log(response.data.result)
+                // response.data.result.map((dat, index) => {
+                //     return (
+                //         console.log(dat)
+                //     )
+                // })
+            )
+
+        // this.setState({
+        //     books: this.props.books
+        // })
+
+        // const query = queryString.parse(this.props.location.search);
+        // if (query.delete) {
+        //     let dataBook = this.state.data;
+        //     dataBook.splice(query.delete, 1);
+        //     console.log(dataBook);
+        //     this.setState({
+        //         data: dataBook
+        //     })
+        // }
+
     }
 
     render() {
+        let tes = this.props.books.map((data) => {
+            console.log(data);
+        })
         return (
 
             <div>
@@ -133,10 +161,22 @@ class Books extends Component {
                     {/* <Buttonmodal /> */}
 
 
-                    <Listbuku data={this.state.data} />
+                    <Listbuku />
                 </Container>
             </div>
         )
     }
 }
-export default Books;
+
+const mapStateToProps = (state) => {
+    return {
+        books: state.books
+    }
+
+}
+const mapDispatchToProps = (dispatch) => {
+    return {
+        getBooks: (data) => dispatch({ type: "GET_ALL", dataBook: data })
+    }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(Books);
