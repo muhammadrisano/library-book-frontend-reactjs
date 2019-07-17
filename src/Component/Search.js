@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Form, Input, Col, Row } from 'reactstrap';
-export default class Search extends Component {
+import { connect } from 'react-redux';
+class Search extends Component {
     render() {
         return (
             <div className="menusearch">
@@ -16,3 +17,5 @@ export default class Search extends Component {
         )
     }
 }
+
+export default connect(Search)

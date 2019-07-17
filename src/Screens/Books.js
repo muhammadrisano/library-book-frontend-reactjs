@@ -22,9 +22,11 @@ class Books extends Component {
         this.state = {
             data: Data,
             modal: false,
-            inputUrl: '',
-            inputTitle: '',
-            inputDescription: '',
+            name: '',
+            writer: '',
+            description: '',
+            location: '',
+            id_category: '',
             bookspage: [],
             books: []
         }
@@ -36,46 +38,49 @@ class Books extends Component {
             modal: !prevState.modal
         }));
     }
-    prosesInput = (event) => {
+    prosesInput = async (event) => {
         event.preventDefault()
-        let stateData = this.state.data
-        let data = {
+        console.log(this.state)      
 
-            title: this.state.inputTitle,
-            description: this.state.inputDescription,
-            url: this.state.inputUrl,
-            created_at: Date(),
-            updated_at: Date()
-        }
-        stateData = [...stateData, data]
+        await axios.post("http://localhost:4000/books",{
+            name: this.state.name,
+            image: this.state.image,
+            writer: this.state.writer,
+            description: this.state.description,
+            location: this.state.location,
+            id_category: this.state.id_category,
+        })
+        .then(response=>
+            console.log(response.data)
+            )
+            this.props.history.push('/')
+        // swal({
+        //     title: "Insert!",
+        //     text: "Insert Success !!",
+        //     icon: "success",
+        //     button: "oke"
+
+        // })
+    }
+    handlerChange = (e) => {
         this.setState({
-            data: stateData,
-            inputTitle: '',
-            inputUrl: '',
-            inputDescription: ''
-        })
-        swal({
-            title: "Insert!",
-            text: "Insert Success !!",
-            icon: "success",
-            button: "oke"
-
+            [e.target.name]: e.target.value
         })
     }
-    changeUrl = (event) => {
-        this.setState({ inputUrl: event.target.value })
+    // changeUrl = (event) => {
+    //     this.setState({ inputUrl: event.target.value })
 
 
-    }
-    changeTitle = (event) => {
-        this.setState({ inputTitle: event.target.value })
+    // }
+    // changeTitle = (event) => {
+    //     this.setState({ inputTitle: event.target.value })
 
-    }
-    changeDescription = (event) => {
-        this.setState({ inputDescription: event.target.value })
+    // }
+    // changeDescription = (event) => {
+    //     this.setState({ inputDescription: event.target.value })
 
 
-    }
+    // }
 
     async componentDidMount() {
 
@@ -111,9 +116,7 @@ class Books extends Component {
     }
 
     render() {
-        let tes = this.props.books.map((data) => {
-            console.log(data);
-        })
+
         return (
 
             <div>
@@ -131,20 +134,38 @@ class Books extends Component {
                                     <FormGroup row>
                                         <Label for="exampleEmail" sm={3} size="lg">Url Image</Label>
                                         <Col sm={9}>
-                                            <Input type="text" name="urlImage" id="ulrImage" placeholder="Url Image.." bsSize="lg" value={this.state.inputUrl} onChange={this.changeUrl} />
+                                            <Input type="text" name="image" id="image" placeholder="Url Image.." bsSize="lg" value={this.state.image} onChange={this.handlerChange} />
                                         </Col>
                                     </FormGroup>
                                     <FormGroup row>
-                                        <Label for="exampleEmail" sm={3} size="lg">Title</Label>
+                                        <Label for="exampleEmail" sm={3} size="lg">Nama Buku</Label>
                                         <Col sm={9}>
-                                            <Input type="text" name="title" id="title" placeholder="Title..." bsSize="lg" value={this.state.inputTitle} onChange={this.changeTitle} />
+                                            <Input type="text" name="name" id="title" placeholder="Title..." bsSize="lg" value={this.state.name} onChange={this.handlerChange} />
                                         </Col>
                                     </FormGroup>
                                     <FormGroup row>
-                                        <Label for="exampleEmail" sm={3} size="lg">Description</Label>
+                                        <Label for="exampleEmail" sm={3} size="lg">Penulis</Label>
+                                        <Col sm={9}>
+                                            <Input type="text" name="writer" id="writer" placeholder="Penulis..." bsSize="lg" value={this.state.writer} onChange={this.handlerChange} />
+                                        </Col>
+                                    </FormGroup>
+                                    <FormGroup row>
+                                        <Label for="exampleEmail" sm={3} size="lg">Lokasi Buku</Label>
+                                        <Col sm={9}>
+                                            <Input type="text" name="location" id="location" placeholder="Lokasi..." bsSize="lg" value={this.state.location} onChange={this.handlerChange} />
+                                        </Col>
+                                    </FormGroup>
+                                    <FormGroup row>
+                                        <Label for="exampleEmail" sm={3} size="lg">Deskripsi</Label>
                                         <Col sm={9}>
 
-                                            <Input type="textarea" name="text" id="exampleText" placeholder="Desciption..." value={this.state.inputDescription} onChange={this.changeDescription} />
+                                            <Input type="textarea" name="description" id="description" placeholder="Deskripsi..." value={this.state.description} onChange={this.handlerChange} />
+                                        </Col>
+                                    </FormGroup>
+                                    <FormGroup row>
+                                        <Label for="exampleEmail" sm={3} size="lg">Kategory</Label>
+                                        <Col sm={9}>
+                                            <Input type="text" name="id_category" id="id_category" placeholder="Kategori..." bsSize="lg" value={this.state.id_category} onChange={this.handlerChange} />
                                         </Col>
                                     </FormGroup>
 
