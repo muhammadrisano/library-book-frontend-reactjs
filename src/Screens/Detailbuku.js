@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Jumbotron, Button, Container, Modal, ModalHeader, ModalBody, ModalFooter, Form, FormGroup, Label, Col, Input } from 'reactstrap';
 import './style.css';
-import Data from '../Database/Datadummy';
 import swal from 'sweetalert';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux'
@@ -49,7 +48,6 @@ class Detailbuku extends Component {
             })
 
             this.setState({
-
                 id_book: dataBook.id_book,
                 id_category: dataBook.id_category,
                 name: dataBook.name,
@@ -101,10 +99,6 @@ class Detailbuku extends Component {
             .then(response =>
                 console.log(response.data)
             )
-        this.props.history.push('/')
-
-
-
         swal({
             title: "Update!",
             text: "Update Success !!",
@@ -112,26 +106,10 @@ class Detailbuku extends Component {
             button: "oke"
 
         })
+        this.props.history.push('/')
     }
 
-    prosesEdit = (event) => {
-        event.preventDefault()
-        let stateData = this.state.data
-        let data = {
-            title: this.state.inputTitle,
-            description: this.state.inputDescription,
-            url: this.state.inputUrl,
-            created_at: Date(),
-            updated_at: Date()
-        }
-        stateData = [...stateData, data]
-        this.setState({
-            data: stateData,
-            inputTitle: '',
-            inputUrl: '',
-            inputDescription: ''
-        })
-    }
+
     deleteBook = () => {
 
 
@@ -175,7 +153,7 @@ class Detailbuku extends Component {
                 </Jumbotron>
                 <div className="book-child">
                     <img src={this.state.image} alt="" width="150px" className="img-thumbnail" />
-                </div>delete
+                </div>
                 <Container className="body-detailbook">
                     <h2>{this.state.name}</h2>
                     <h3 className="tgl-detail">{this.state.created_at}</h3>

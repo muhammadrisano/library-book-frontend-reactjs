@@ -28,7 +28,7 @@ class Paging extends Component {
 
 
         return (
-            <div>
+            <div className="pagination-head">
                 <Pagination
                     activePage={this.state.activePage}
                     itemsCountPerPage={12}
