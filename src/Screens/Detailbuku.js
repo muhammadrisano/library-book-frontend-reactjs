@@ -7,6 +7,7 @@ import { connect } from 'react-redux'
 import { SIGTSTP } from 'constants';
 import { async } from 'q';
 import axios from 'axios';
+import Api from '../axios/Api'
 
 class Detailbuku extends Component {
     constructor(props) {
@@ -87,7 +88,7 @@ class Detailbuku extends Component {
     updateFinish = async (e) => {
         e.preventDefault();
 
-        await axios.patch("http://localhost:4000/books/" + this.state.id_params, {
+        await Api.patch("books/" + this.state.id_params, {
             name: this.state.name,
             image: this.state.image,
             writer: this.state.writer,
@@ -120,9 +121,9 @@ class Detailbuku extends Component {
             buttons: true,
             dangerMode: true,
         })
-            .then((willDelete) => {
+            .then(async (willDelete) => {
                 if (willDelete) {
-                    axios.delete('http://localhost:4000/books/' + this.state.id_book)
+                    await Api.delete('books/' + this.state.id_book)
                         .then(response =>
                             console.log(response.data)
                         )
