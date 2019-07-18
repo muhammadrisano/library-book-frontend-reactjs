@@ -2,13 +2,14 @@ import React, { Component } from 'react';
 import { Form, Input, Col, Row } from 'reactstrap';
 import { connect } from 'react-redux';
 import axios from 'axios';
+import Api from '../axios/Api'
 class Search extends Component {
 
 
 
     searchBook = async (e) => {
 
-        await axios.get('http://localhost:4000/books?search=' + e.target.value)
+        await Api.get('books?search=' + e.target.value)
             .then(response =>
                 this.props.searchBook(response.data.result)
             )

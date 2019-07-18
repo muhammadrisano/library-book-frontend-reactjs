@@ -9,3 +9,9 @@
 body{
     background-color: rgb(136, 54, 54) !important;
 }
+
+.kotak-pencarian
+{
+    height: 420px;
+    overflow: scroll;
+}

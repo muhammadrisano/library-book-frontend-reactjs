@@ -4,6 +4,7 @@ import axios from 'axios';
 import { connect } from 'react-redux';
 import Pagination from "react-js-pagination";
 import ReactDOM from "react-dom";
+import Api from "../axios/Api"
 
 
 class Paging extends Component {
@@ -16,7 +17,7 @@ class Paging extends Component {
 
 
     handlePageChange = async (pageNumber) => {
-        await axios.get("http://localhost:4000/books?page=" + pageNumber)
+        await Api.get("http://localhost:4000/books?page=" + pageNumber)
             .then((response) => {
                 this.props.pageList(response.data)
                 this.setState({ activePage: pageNumber })
