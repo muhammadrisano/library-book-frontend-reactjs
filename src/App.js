@@ -4,6 +4,7 @@ import books from './Screens/Books';
 import detailbook from './Screens/Detailbuku';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
+import peminjaman from './Screens/Peminjaman';
 function NoMacth() {
   return (
     <div>
@@ -64,6 +65,7 @@ class App extends Component {
               <Redirect exact from="/" to="/books" />
               <Route path='/books' exact component={books} />
               <Route path='/books/:idbook' exact component={detailbook} />
+              <Route path='/peminjaman' exact component={peminjaman} />
               <Route component={NoMacth} />
             </Switch>
           </BrowserRouter>
