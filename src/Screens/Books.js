@@ -14,6 +14,7 @@ import swal from 'sweetalert';
 import queryString from 'query-string';
 import { connect } from 'react-redux'
 import axios from 'axios'
+import Api from '../axios/Api'
 
 
 class Books extends Component {
@@ -43,7 +44,7 @@ class Books extends Component {
         event.preventDefault()
         console.log(this.state)
 
-        await axios.post("http://localhost:4000/books", {
+        await Api.post("books", {
             name: this.state.name,
             image: this.state.image,
             writer: this.state.writer,
@@ -81,7 +82,7 @@ class Books extends Component {
 
     async componentDidMount() {
 
-        await axios.get('http://localhost:4000/books?page=1')
+        await Api.get('books?page=1')
             .then(response =>
                 this.props.getBooks(response.data)
             )
