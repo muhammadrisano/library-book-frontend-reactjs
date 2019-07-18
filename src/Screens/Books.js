@@ -51,17 +51,25 @@ class Books extends Component {
             location: this.state.location,
             id_category: this.state.id_category,
         })
-            .then(response =>
+            .then((response) => {
                 console.log(response.data)
+                swal({
+                    title: "Insert !",
+                    text: "Insert Success !!",
+                    icon: "success",
+                    button: "oke"
+
+                });
+            })
+            .catch(
+                swal({
+                    title: "delete",
+                    text: "Delete Failed!",
+                    icon: "warning",
+                    buttons: "oke",
+                })
             )
         this.props.history.push('/')
-        // swal({
-        //     title: "Insert!",
-        //     text: "Insert Success !!",
-        //     icon: "success",
-        //     button: "oke"
-
-        // })
     }
     handlerChange = (e) => {
         this.setState({
@@ -69,20 +77,7 @@ class Books extends Component {
         })
     }
 
-    // changeUrl = (event) => {
-    //     this.setState({ inputUrl: event.target.value })
 
-
-    // }
-    // changeTitle = (event) => {
-    //     this.setState({ inputTitle: event.target.value })
-
-    // }
-    // changeDescription = (event) => {
-    //     this.setState({ inputDescription: event.target.value })
-
-
-    // }
 
     async componentDidMount() {
 
@@ -90,21 +85,6 @@ class Books extends Component {
             .then(response =>
                 this.props.getBooks(response.data)
             )
-
-        // this.setState({
-        //     books: this.props.books
-        // })
-
-        // const query = queryString.parse(this.props.location.search);
-        // if (query.delete) {
-        //     let dataBook = this.state.data;
-        //     dataBook.splice(query.delete, 1);
-        //     console.log(dataBook);
-        //     this.setState({
-        //         data: dataBook
-        //     })
-        // }
-
     }
 
     render() {
@@ -175,7 +155,9 @@ class Books extends Component {
 
 
                     <Listbuku />
+
                     <Paging />
+
                 </Container>
             </div>
         )
