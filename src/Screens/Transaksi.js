@@ -27,7 +27,8 @@ class Transaksi extends Component {
         }
         this.toggle = this.updatePengembalian.bind(this);
     }
-    updatePengembalian = async () => {
+    updatePengembalian = async (e) => {
+
         await Api.patch('loanbooks/' + this.state.id_loanbook, {
             card_number: this.state.card_number,
             id_book: this.state.id_book,
@@ -53,9 +54,7 @@ class Transaksi extends Component {
                     buttons: "oke",
                 })
             )
-        this.setState(prevState => ({
-            modal: !prevState.modal
-        }));
+
         this.props.history.push('/transaksi')
     }
 
@@ -101,6 +100,11 @@ class Transaksi extends Component {
             terlambat: hariTerlambat
         })
 
+    }
+    toggle() {
+        this.setState(prevState => ({
+            modal: !prevState.modal
+        }));
     }
     hitungDenda = () => {
         let tgl = new Date()
@@ -208,7 +212,7 @@ class Transaksi extends Component {
                         </div>
                     </div>
                     {/* Modal Pengembalian */}
-                    <form action="" method="get">
+                    <form onSubmit={this.updatePengembalian}>
                         <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
                             <div class="modal-dialog modal-lg">
                                 <div class="modal-content">
@@ -279,7 +283,7 @@ class Transaksi extends Component {
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                        <button type="submit" class="btn btn-primary" onClick={() => this.updatePengembalian()}>Proses Pengembalian</button>
+                                        <button type="submit" class="btn btn-primary" onClick={this.toggle}>Proses Pengembalian</button>
                                     </div>
                                 </div>
                             </div>
