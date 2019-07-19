@@ -58,10 +58,35 @@ class Transaksi extends Component {
         }));
         this.props.history.push('/transaksi')
     }
+
+
+
+
     prosesPengembalian = (id_loanbook) => {
+
         let pilihTransaksi = this.state.transaksiBuku.find((item) => {
             return item.id_loanbook == id_loanbook
         })
+
+
+        let tgl = new Date()
+        var hitung = 0
+        var hariTerlambat = 0
+        let tanggal = tgl.getDate();
+        let bulan = tgl.getMonth() + 1;
+        let tahun = tgl.getFullYear();
+        let expired = pilihTransaksi.expired_date.split('-')
+
+        if (parseInt(bulan) > parseInt(expired[1])) {
+            hitung += (parseInt(bulan) - parseInt(expired[1])) * 5000 * 30
+            hariTerlambat += (parseInt(bulan) - parseInt(expired[1])) * 30
+            hariTerlambat += parseInt(expired[2])
+        } else if (parseInt(bulan) == parseInt(expired[1]) && parseInt(tanggal) > parseInt(expired[2])) {
+            hitung += (parseInt(tanggal) - parseInt(expired[2])) * 5000
+            hariTerlambat += parseInt(tanggal) - parseInt(expired[2])
+        }
+        console.log(expired);
+        console.log(parseInt(hariTerlambat));
         this.setState({
             id_loanbook: pilihTransaksi.id_loanbook,
             image: pilihTransaksi.image,
@@ -71,8 +96,11 @@ class Transaksi extends Component {
             card_number: pilihTransaksi.card_number,
             name: pilihTransaksi.name,
             phone: pilihTransaksi.phone,
-            expired_date: pilihTransaksi.expired_date
+            expired_date: pilihTransaksi.expired_date,
+            denda: hitung,
+            terlambat: hariTerlambat
         })
+
     }
     hitungDenda = () => {
         let tgl = new Date()
@@ -82,6 +110,7 @@ class Transaksi extends Component {
         let bulan = tgl.getMonth();
         let tahun = tgl.getFullYear();
         let expired = this.state.expired_date.split('-')
+        console.log(expired)
         if (parseInt(bulan) > parseInt(expired[1])) {
             hitung += (parseInt(expired[1]) - parseInt(bulan)) * 5000 * 30
             hariTerlambat += (parseInt(expired[1]) - parseInt(bulan)) * 30
@@ -179,82 +208,84 @@ class Transaksi extends Component {
                         </div>
                     </div>
                     {/* Modal Pengembalian */}
-                    <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-                        <div class="modal-dialog modal-lg">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
+                    <form action="" method="get">
+                        <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-lg">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
 
-                                    <div className="row">
-                                        <div className="col-4">
-                                            <img src={this.state.image} width="250px" alt="" />
-                                        </div>
-                                        <div className="col-8" >
-                                            <div className="row">
-                                                <div className="col-5">
-                                                    Judul Buku
-                                                </div>
-
-                                                <div className="col-7">
-                                                    {this.state.title}
-                                                </div>
+                                        <div className="row">
+                                            <div className="col-4">
+                                                <img src={this.state.image} width="250px" alt="" />
                                             </div>
-                                            <div className="row">
-                                                <div className="col-5">
-                                                    Penulis
-                                                </div>
-                                                <div className="col-7">
-                                                    {this.state.writer}
-                                                </div>
-                                            </div>
-                                            <div className="row">
-                                                <div className="col-5">
-                                                    Nama Peminjam
+                                            <div className="col-8" >
+                                                <div className="row">
+                                                    <div className="col-5">
+                                                        Judul Buku
                                                 </div>
 
-                                                <div className="col-7">
-                                                    {this.state.name}
+                                                    <div className="col-7">
+                                                        {this.state.title}
+                                                    </div>
+                                                </div>
+                                                <div className="row">
+                                                    <div className="col-5">
+                                                        Penulis
+                                                </div>
+                                                    <div className="col-7">
+                                                        {this.state.writer}
+                                                    </div>
+                                                </div>
+                                                <div className="row">
+                                                    <div className="col-5">
+                                                        Nama Peminjam
+                                                </div>
 
+                                                    <div className="col-7">
+                                                        {this.state.name}
+
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div className="row">
-                                                <div className="col-5">
-                                                    No HP
+                                                <div className="row">
+                                                    <div className="col-5">
+                                                        No HP
                                                 </div>
 
-                                                <div className="col-7">
-                                                    {this.state.phone}
+                                                    <div className="col-7">
+                                                        {this.state.phone}
+                                                    </div>
                                                 </div>
+                                                <div className="row">
+                                                    <div className="col-5">
+                                                        Tanggal Pengembalian
+                                                </div>
+                                                    <div className="col-7">
+                                                        {this.state.expired_date}
+                                                    </div>
+                                                </div>
+                                                <hr />
+                                                <br />
+                                                <h5>Denda/Hari :Rp. 5.000</h5>
+                                                <h5>Terlambat : {this.state.terlambat} Hari</h5>
+                                                <h5>Denda : Rp. {this.state.denda}</h5>
                                             </div>
-                                            <div className="row">
-                                                <div className="col-5">
-                                                    Tanggal Pengembalian
-                                                </div>
-                                                <div className="col-7">
-                                                    {this.state.expired_date}
-                                                </div>
-                                            </div>
-                                            <hr />
-                                            <br />
-                                            <h5>Denda/Hari :Rp. 5.000</h5>
-                                            <h5>Terlambat :{this.state.terlambat} Hari</h5>
-                                            <h5>Denda : Rp. {this.state.denda}</h5>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                    <button type="button" class="btn btn-primary" onClick={() => this.updatePengembalian()}>Proses Pengembalian</button>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                        <button type="submit" class="btn btn-primary" onClick={() => this.updatePengembalian()}>Proses Pengembalian</button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    {/* End Modal Pengembalian */}
+                        {/* End Modal Pengembalian */}
+                    </form>
                 </div>
             </div >
         )
