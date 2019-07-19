@@ -6,7 +6,6 @@ import Api from '../axios/Api'
 class Search extends Component {
 
 
-
     searchBook = async (e) => {
 
         await Api.get('books?search=' + e.target.value)

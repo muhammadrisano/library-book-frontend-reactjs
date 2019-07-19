@@ -157,7 +157,7 @@ class Detailbuku extends Component {
                 </div>
                 <Container className="body-detailbook">
                     <h2>{this.state.name}</h2>
-                    <h3 className="tgl-detail">{this.state.created_at}</h3>
+                    <h3 className="tgl-detail">{this.state.writer}</h3>
                     <p>
                         {this.state.description}
                     </p>

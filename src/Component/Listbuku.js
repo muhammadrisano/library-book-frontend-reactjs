@@ -37,7 +37,7 @@ class Listbuku extends Component {
     // }
 
     hapusBook = async (item) => {
-        await Axios.delete("http://localhost:4000/books/" + item)
+        await Api.delete("http://localhost:4000/books/" + item)
             .then((response) => {
                 swal({
                     title: "Delete !",
