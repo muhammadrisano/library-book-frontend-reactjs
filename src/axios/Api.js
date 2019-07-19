@@ -1,5 +1,5 @@
 import axios from 'axios'
 
 export default axios.create({
-    baseURL: "http://libraryapi.muhammadrisano.online/"
+    baseURL: "http://localhost:4000/"
 })

@@ -5,6 +5,7 @@ import '../assets/css/peminjaman.css'
 import axios from 'axios'
 import { async } from 'q';
 import Api from '../axios/Api'
+import swal from 'sweetalert';
 class Peminjaman extends Component {
     constructor() {
         super()
@@ -37,21 +38,33 @@ class Peminjaman extends Component {
             id_book: this.state.id_book,
             expired_date: this.state.tgl_pengembalian,
             forfeit: 0,
-            information: 'a',
+            information: 'DIPINJAM',
         })
             .then((response) => {
-                console.log(response)
+                swal({
+                    title: "Peminjaman!",
+                    text: "Peminjaman Success !!",
+                    icon: "success",
+                    button: "oke"
+
+                })
+                this.props.history.push('/transaksi')
             })
-            .catch((response) => {
-                console.log(response)
-            })
+            .catch(
+                swal({
+                    title: "Peminjaman",
+                    text: "Peminjaman Failed!",
+                    icon: "warning",
+                    buttons: "oke",
+                })
+            )
     }
     componentWillMount() {
         let hari = this.state.tgl.getDate() + 6
         let bulan = this.state.tgl.getMonth()
         let tahun = this.state.tgl.getFullYear()
         this.setState({
-            tgl_pengembalian: `${tahun}-0${bulan}-${hari}`
+            tgl_pengembalian: `${tahun}-${bulan}-${hari}`
         })
     }
     cariPeminjam = async (e) => {
@@ -232,7 +245,7 @@ class Peminjaman extends Component {
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                <button type="button" class="btn btn-primary">Save changes</button>
+
                             </div>
                         </div>
                     </div>
@@ -292,7 +305,7 @@ class Peminjaman extends Component {
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                <button type="button" class="btn btn-primary">Save changes</button>
+
                             </div>
                         </div>
                     </div>
