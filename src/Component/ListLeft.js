@@ -15,7 +15,8 @@ let ListLeft = () => {
 
                 <Link to="#" class="list-group-item list-group-item-action disabled bg-primary text-white active font-weight-bold">
                     Registrasi </Link>
-                <Link to="Peminjam" class="list-group-item list-group-item-action">Peminjam</Link>
+                <Link to="register" class="list-group-item list-group-item-action">Peminjam</Link>
+
 
 
             </div>
