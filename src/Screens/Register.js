@@ -103,8 +103,45 @@ class Register extends Component {
                         </div>
                         <div className="col-9 body-loan">
                             <div class="card">
-                                <h5 class="card-header">Riwayat</h5>
+                                <h5 class="card-header">Register Peminjam</h5>
                                 <div class="card-body">
+                                    <div className="form-group row">
+                                        <label for="inputEmail3" class="col-sm-3 col-form-label">Nomor Identitas</label>
+                                        <div class="col-sm-8">
+                                            <input type="text" class="form-control" id="card_number" name="card_number" value={this.state.card_number} placeholder="Nomor Identitas" />
+                                        </div>
+
+                                    </div>
+                                    <div className="form-group row">
+                                        <label for="inputEmail3" class="col-sm-3 col-form-label">Nama Peminjam</label>
+                                        <div class="col-sm-8">
+                                            <input type="text" class="form-control" id="nama_peminjam" name="nama_peminjam" value="" placeholder="Nama Peminjamm" />
+                                        </div>
+                                    </div>
+                                    <div className="form-group row">
+                                        <label for="inputEmail3" class="col-sm-3 col-form-label">Alamat Peminjam</label>
+                                        <div class="col-sm-8">
+                                            <input type="text" class="form-control" id="alamat_peminjam" name="alamat_peminjam" value="" placeholder="Alamat Peminjam" />
+                                        </div>
+                                    </div>
+                                    <div className="form-group row">
+                                        <label for="inputEmail3" class="col-sm-3 col-form-label">No HP</label>
+                                        <div class="col-sm-8">
+                                            <input type="text" class="form-control" id="phone" name="phone" value="" placeholder="No HP" />
+                                        </div>
+
+
+                                    </div>
+                                    <div className="form-group row">
+                                        <label for="nama_buku" class="col-sm-3 col-form-label">Pekerjaan</label>
+                                        <div class="col-sm-8">
+                                            <input type="text" class="form-control" id="job" name="job" value="" placeholder="Pekerjaan" />
+                                        </div>
+                                    </div>
+
+                                    <div className="form-group row">
+                                        <div className="col-sm-3"></div><div className="col-sm-8"><button type="submit" className="btn btn-primary" onClick={() => this.pinjamBuku()}>Pinjam Buku</button> <button type="submit" className="btn btn-warning">Batal</button></div>
+                                    </div>
 
                                 </div>
                             </div>

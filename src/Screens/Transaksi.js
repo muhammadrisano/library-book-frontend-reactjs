@@ -28,7 +28,7 @@ class Transaksi extends Component {
         this.toggle = this.updatePengembalian.bind(this);
     }
     updatePengembalian = async (e) => {
-
+        e.prevenDefault()
         await Api.patch('loanbooks/' + this.state.id_loanbook, {
             card_number: this.state.card_number,
             id_book: this.state.id_book,
