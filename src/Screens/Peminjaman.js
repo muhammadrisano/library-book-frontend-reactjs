@@ -24,12 +24,12 @@ class Peminjaman extends Component {
             tgl_pengembalian: '',
         }
     }
-    testtgl = (e) => {
-        this.setState({
-            tgl_pengembalian: e.target.value
-        })
+    // testtgl = (e) => {
+    //     this.setState({
+    //         tgl_pengembalian: e.target.value
+    //     })
 
-    }
+    // }
 
     pinjamBuku = async () => {
         console.log(this.state)
@@ -64,7 +64,7 @@ class Peminjaman extends Component {
         let bulan = this.state.tgl.getMonth()
         let tahun = this.state.tgl.getFullYear()
         this.setState({
-            tgl_pengembalian: `${tahun}-${bulan}-${hari}`
+            tgl_pengembalian: `${tahun}-0${bulan}-${hari}`
         })
     }
     cariPeminjam = async (e) => {

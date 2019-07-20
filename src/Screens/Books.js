@@ -42,6 +42,7 @@ class Books extends Component {
     }
     prosesInput = async (event) => {
         event.preventDefault()
+
         console.log(this.state)
 
         await Api.post("books", {
