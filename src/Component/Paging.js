@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
-import { async } from 'q';
-import axios from 'axios';
+
 import { connect } from 'react-redux';
 import Pagination from "react-js-pagination";
-import ReactDOM from "react-dom";
+
 import Api from "../axios/Api"
 
 
@@ -23,7 +22,6 @@ class Paging extends Component {
                 this.setState({ activePage: pageNumber })
             }
             )
-
     }
     render() {
 

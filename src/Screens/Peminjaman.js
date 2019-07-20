@@ -67,6 +67,11 @@ class Peminjaman extends Component {
             tgl_pengembalian: `${tahun}-0${bulan}-${hari}`
         })
     }
+    handlerCange = (e) => {
+        this.setState({
+            tgl_pengembalian: e.target.value
+        })
+    }
     cariPeminjam = async (e) => {
         await Api.get("user?search=" + e.target.value)
             .then((response) => {
@@ -180,9 +185,9 @@ class Peminjaman extends Component {
                                     </div>
                                 </div>
                                 <div className="form-group row">
-                                    <label for="inputtext3" class="col-sm-3 col-form-label" ReadOnly>Tanggal Pengembalian</label>
+                                    <label for="inputtext3" class="col-sm-3 col-form-label" >Tanggal Pengembalian</label>
                                     <div class="col-sm-8">
-                                        <input type="date" class="form-control" id="tanggal" name="tanggal" value={this.state.tgl_pengembalian} onChange={this.testtgl} />
+                                        <input type="date" class="form-control" id="tanggal" name="tanggal" onChange={this.handlerCange} value={this.state.tgl_pengembalian} />
 
                                     </div>
                                 </div>
