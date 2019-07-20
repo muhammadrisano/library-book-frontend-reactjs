@@ -11,3 +11,109 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+<<<<<<< HEAD
+=======
+
+
+.headernav{
+  height: 80px;
+  box-shadow: 20px 0 20px 10px rgba(0, 0, 0, 1);
+}
+.headernav .brand{
+  font-size: 30px;
+}
+.menusearch{
+  margin-top: 100px;
+}
+#search{
+height: 60px;
+border-radius: 40px;
+box-shadow: 4px 4px 4px rgba(0, 0, 0, .75);
+font-size: 20px;
+}
+.button-add{
+  color:white;
+ 
+  height: 50px;
+  font-weight: bold;
+ 
+
+}
+.button-modal{
+  text-align: right;
+  margin:50px 170px;
+} 
+.button-modal button{
+  background-color: rgb(200, 202, 44);
+  border-color: white;
+  font-weight: bold;
+}
+.button-modal button:hover{
+  background-color: rgb(225, 236, 72);
+  border-color: white;
+}
+.cardbuku{
+border-radius: 20px !important;
+  box-shadow: 3px 3px 3px rgba(0, 0, 0, .75);
+  transition: .25s;
+  position: relative;
+}
+.cardimg{
+  border-radius: 20px !important;
+}
+.cardbuku:hover{
+transform: scale(1.2,1.2);
+/* box-shadow: 3px 3px 3px rgba(200, 202, 44, .75);
+border: 1px solid gray; */
+filter: brightness(1.1) contrast(1.1)
+}
+.header-book{
+  height: 400px !important;
+  overflow: hidden !important;
+
+}
+.header-book img{
+  margin-top: -800px;
+
+}
+.book-child{
+  position:absolute;
+  right: 80px;
+  top: 300px;
+  
+}
+.book-child img{
+  border-radius: 5px;
+  box-shadow: 2px 2px 3px rgba(0, 0, 0, .75);
+}
+.body-detailbook h2{
+  font-weight: bold;
+  font-size: 43px;
+}
+.button-detail{
+  position: absolute;
+}
+.button-detail h3{
+  display: inline-block;
+  margin: 5px 10px;
+  color: white;
+  text-shadow: 0px 0px 3px black;
+}
+.btn-close{
+  position: absolute;
+  right: 12px;
+  top: 8px;
+  color: blue;
+}
+.tgl-detail{
+  margin-top: -5px;
+  margin-bottom: 30px;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-size: 20px;
+  font-weight: bold;
+}
+.pagination-head{
+  width: 100%;
+  padding: 10px 40%;
+}
+>>>>>>> ee71556c0e1fecf253c339aafd40b5092c8d56a9

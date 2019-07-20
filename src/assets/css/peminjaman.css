@@ -1,0 +1,17 @@
+.head-loan{
+    margin-top: 100px !important;
+}
+
+.body-loan{
+    padding-left: 0px !important;
+}
+
+body{
+    background-color: rgb(240, 224, 195) !important;
+}
+
+.kotak-pencarian
+{
+    height: 420px;
+    overflow: scroll;
+}
