@@ -19,7 +19,7 @@
     "sweetalert": "^2.1.2"
   },
   "scripts": {
-    "start": "POST=4321 react-scripts start",
+    "start": "PORT=4321 react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
