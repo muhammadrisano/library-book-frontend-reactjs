@@ -61,7 +61,7 @@ class Peminjaman extends Component {
     }
     componentWillMount() {
         let hari = this.state.tgl.getDate() + 6
-        let bulan = this.state.tgl.getMonth()
+        let bulan = this.state.tgl.getMonth() + 1
         let tahun = this.state.tgl.getFullYear()
         this.setState({
             tgl_pengembalian: `${tahun}-0${bulan}-${hari}`

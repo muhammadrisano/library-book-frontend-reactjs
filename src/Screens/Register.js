@@ -18,14 +18,44 @@ class Register extends Component {
         }
     }
 
-    changeHandler(e) {
+    changeHandler=(e)=>{
         this.setState({
             [e.target.name]: e.target.value
         })
     }
-    registerUser() {
-
+    registerUser=async() => {
+        await Api.post("user", {
+            card_number: this.state.card_number,
+            name: this.state.name,
+            phone: this.state.phone,
+            job: this.state.job,
+            address: this.state.address
+        })
+            .then((result) => {
+                this.setState({
+                    card_number: "",
+                    name: "",
+                    phone: "",
+                    job: "",
+                    address: ""
+                })
+                swal({
+                title: "Register!",
+                text: "Register Success !!",
+                icon: "success",
+                button: "oke"
+                })
+            })
+            .catch(
+                swal({
+                    title: "Register",
+                    text: "Register Failed!",
+                    icon: "warning",
+                    buttons: "oke"
+                })
+            )
     }
+
 
 
     render() {
@@ -45,33 +75,33 @@ class Register extends Component {
                                     <div className="form-group row">
                                         <label for="inputEmail3" class="col-sm-3 col-form-label">Nomor Identitas</label>
                                         <div class="col-sm-8">
-                                            <input type="text" class="form-control" id="card_number" name="card_number" value={this.state.card_number} placeholder="Nomor Identitas" />
+                                            <input type="text" class="form-control" id="card_number" name="card_number" value={this.state.card_number} onChange={this.changeHandler} placeholder="Nomor Identitas" />
                                         </div>
 
                                     </div>
                                     <div className="form-group row">
                                         <label for="inputEmail3" class="col-sm-3 col-form-label">Nama Peminjam</label>
                                         <div class="col-sm-8">
-                                            <input type="text" class="form-control" id="name" name="name" value={this.state.name} placeholder="Nama Peminjamm" />
+                                            <input type="text" class="form-control" id="name" name="name" value={this.state.name} onChange={this.changeHandler} placeholder="Nama Peminjamm" />
                                         </div>
                                     </div>
                                     <div className="form-group row">
                                         <label for="inputEmail3" class="col-sm-3 col-form-label">Alamat Peminjam</label>
                                         <div class="col-sm-8">
-                                            <input type="text" class="form-control" id="address" name="address" value={this.state.address} placeholder="Alamat Peminjam" />
+                                            <input type="text" class="form-control" id="address" name="address" value={this.state.address} onChange={this.changeHandler} placeholder="Alamat Peminjam" />
                                         </div>
                                     </div>
                                     <div className="form-group row">
                                         <label for="inputEmail3" class="col-sm-3 col-form-label">No HP</label>
                                         <div class="col-sm-8">
-                                            <input type="text" class="form-control" id="phone" name="phone" value={this.state.phone} placeholder="No HP" />
+                                            <input type="text" class="form-control" id="phone" name="phone" value={this.state.phone} onChange={this.changeHandler} placeholder="No HP" />
                                         </div>
 
                                     </div>
                                     <div className="form-group row">
                                         <label for="nama_buku" class="col-sm-3 col-form-label">Pekerjaan</label>
                                         <div class="col-sm-8">
-                                            <input type="text" class="form-control" id="job" name="job" value={this.state.job} placeholder="Pekerjaan" />
+                                            <input type="text" class="form-control" id="job" name="job" value={this.state.job} onChange={this.changeHandler} placeholder="Pekerjaan" />
                                         </div>
                                     </div>
 
