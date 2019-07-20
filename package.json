@@ -1,17 +1,5 @@
 {
-<<<<<<< HEAD
-  "name": "librarybook",
-  "version": "0.1.0",
-  "private": true,
-  "dependencies": {
-    "react": "^16.8.6",
-    "react-dom": "^16.8.6",
-    "react-scripts": "3.0.1"
-  },
-  "scripts": {
-    "start": "PORT=4321 react-scripts start",
-=======
-  "name": "tugas1",
+  "name": "libarybook",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -31,8 +19,7 @@
     "sweetalert": "^2.1.2"
   },
   "scripts": {
-    "start": "react-scripts start",
->>>>>>> ee71556c0e1fecf253c339aafd40b5092c8d56a9
+    "start": "POST=4321 react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
