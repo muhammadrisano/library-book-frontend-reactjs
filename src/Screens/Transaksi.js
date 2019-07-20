@@ -29,7 +29,7 @@ class Transaksi extends Component {
     }
     updatePengembalian = async (e) => {
 
-        console.log("hello");
+
         await Api.patch('loanbooks/' + this.state.id_loanbook, {
             card_number: this.state.card_number,
             id_book: this.state.id_book,
@@ -54,6 +54,7 @@ class Transaksi extends Component {
                     buttons: "oke",
                 })
             )
+
 
     }
 
@@ -208,6 +209,7 @@ class Transaksi extends Component {
                     </div>
                     {/* Modal Pengembalian */}
 
+
                     <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
                         <div class="modal-dialog modal-lg">
                             <div class="modal-content">
@@ -275,10 +277,12 @@ class Transaksi extends Component {
                                             <h5>Denda : Rp. {this.state.denda}</h5>
                                         </div>
                                     </div>
+
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                                     <a href="/transaksi" class="btn btn-primary" onClick={this.updatePengembalian} data-dismiss="modal">Proses Pengembalian</a>
+
                                 </div>
                             </div>
                         </div>
