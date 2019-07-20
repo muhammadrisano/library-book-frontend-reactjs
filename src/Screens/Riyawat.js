@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import Header from '../Component/Header'
 import ListLeft from '../Component/ListLeft'
 import Api from '../axios/Api'
-import swal from 'sweetalert';
+
 
 
 
@@ -80,14 +80,14 @@ class Riwayat extends Component {
             if (item.information == "SELESAI") {
                 return (
                     < tr key={item.id_loanbook}>
-                        <td scope="col">{no++}</td>
-                        <td scope="col">{item.card_number}</td>
-                        <td scope="col">{item.name}</td>
-                        <td scope="col">{item.title}</td>
-                        <td scope="col">{item.writer}</td>
-                        <td scope="col">{aturTanggal(item.expired_date)}</td>
-                        <td scope="col"><img src={item.image} alt={item.title} width="70px" /></td>
-                        <td scope="col">{item.forfeit}</td>
+                        <th scope="col">{no++}</th>
+                        <th scope="col">{item.card_number}</th>
+                        <th scope="col">{item.name}</th>
+                        <th scope="col">{item.title}</th>
+                        <th scope="col">{item.writer}</th>
+                        <th scope="col">{aturTanggal(item.expired_date)}</th>
+                        <th scope="col"><img src={item.image} alt={item.title} width="70px" /></th>
+                        <th scope="col">{item.forfeit}</th>
                     </tr>
                 )
             }

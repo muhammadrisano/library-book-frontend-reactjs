@@ -3,7 +3,7 @@ import Header from '../Component/Header'
 import ListLeft from '../Component/ListLeft'
 import Api from '../axios/Api'
 import swal from 'sweetalert';
-import { Redirect } from 'react-router-dom'
+
 
 
 
