@@ -15,6 +15,8 @@ import queryString from 'query-string';
 import { connect } from 'react-redux'
 import axios from 'axios'
 import Api from '../axios/Api'
+import FormLogin from '../Component/FormLogin'
+import '../assets/css/books.css'
 
 
 class Books extends Component {
@@ -30,7 +32,8 @@ class Books extends Component {
             location: '',
             id_category: '',
             bookspage: [],
-            books: []
+            books: [],
+            formLogin: false
         }
         this.toggle = this.toggle.bind(this);
     }
@@ -39,6 +42,19 @@ class Books extends Component {
         this.setState(prevState => ({
             modal: !prevState.modal
         }));
+    }
+    showFormLogin = (e) => {
+        e.preventDefault()
+        this.setState({
+            formLogin: true
+        })
+
+    }
+    hideFormLogin = (e) => {
+
+        this.setState({
+            formLogin: false
+        })
     }
     prosesInput = async (event) => {
         event.preventDefault()
@@ -94,6 +110,8 @@ class Books extends Component {
         return (
 
             <div>
+                {this.state.formLogin ? <FormLogin hidelogin={this.hideFormLogin} /> : <a href="" onClick={this.showFormLogin}><i class="fas fa-angle-double-left"></i></a>}
+
                 <Header />
                 <Container>
                     <Search />
