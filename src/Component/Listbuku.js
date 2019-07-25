@@ -82,7 +82,7 @@ class Listbuku extends Component {
                             <CardImg top width="100%" src={item.image} alt="Card image cap" className="cardimg" />
                         </Link>
                         <CardBody className="text-center">
-                            <CardTitle>{item.name}</CardTitle>
+                            <CardTitle>{(item.name.length > 25) ? item.name.slice(0, 25) + "..." : <div>{item.name}</div>}</CardTitle>
                         </CardBody>
                     </Card>
                 </Col>
