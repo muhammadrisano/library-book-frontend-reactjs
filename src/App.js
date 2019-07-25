@@ -9,6 +9,8 @@ import transaksi from './Screens/Transaksi';
 import riwayat from './Screens/Riyawat';
 import register from './Screens/Register';
 import registerUser from './Screens/RegisterUser';
+import userborrow from './Screens/Userborrow';
+import userHistoryBorrow from './Screens/UserHistoryBorrow';
 function NoMacth() {
   return (
     <div>
@@ -18,7 +20,8 @@ function NoMacth() {
 }
 const globalState = {
   books: [],
-  jumlahbuku: 0
+  jumlahbuku: 0,
+  user: null
 }
 
 // Reducer
@@ -41,6 +44,11 @@ const rootReducer = (state = globalState, action) => {
       return {
         ...state,
         books: action.dataPage.result
+      }
+    case 'LOGIN_USER':
+      return {
+        ...state,
+        user: action.dataLogin
       }
     default:
       return state
@@ -74,6 +82,8 @@ class App extends Component {
               <Route path='/riwayat' exact component={riwayat} />
               <Route path='/register' exact component={register} />
               <Route path='/registeruser' exact component={registerUser} />
+              <Route path='/user/borrow' exact component={userborrow} />
+              <Route path='/user/historyborrow' exact component={userHistoryBorrow} />
               <Route component={NoMacth} />
             </Switch>
           </BrowserRouter>
