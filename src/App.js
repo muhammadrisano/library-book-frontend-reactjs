@@ -11,6 +11,9 @@ import register from './Screens/Register';
 import registerUser from './Screens/RegisterUser';
 import userborrow from './Screens/Userborrow';
 import userHistoryBorrow from './Screens/UserHistoryBorrow';
+import { persistStore, persistReducer } from 'redux-persist';
+import storage from 'redux-persist/lib/storage'
+
 function NoMacth() {
   return (
     <div>
@@ -65,6 +68,14 @@ const rootReducer = (state = globalState, action) => {
 }
 
 const storeRedux = createStore(rootReducer);
+const persistConfig = {
+  key: 'root',
+  storage,
+}
+
+const persistedReducer = persistReducer(persistConfig, rootReducer)
+
+
 
 class App extends Component {
 
