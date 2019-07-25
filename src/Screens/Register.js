@@ -10,6 +10,7 @@ class Register extends Component {
     constructor() {
         super()
         this.state = {
+
             card_number: "",
             name: "",
             phone: "",
@@ -60,6 +61,7 @@ class Register extends Component {
 
     render() {
 
+
         return (
             <div>
                 <div>
@@ -70,6 +72,7 @@ class Register extends Component {
                         </div>
                         <div className="col-9 body-loan">
                             <div class="card">
+
                                 <h5 class="card-header">Register Peminjam</h5>
                                 <div class="card-body">
                                     <div className="form-group row">
@@ -108,6 +111,7 @@ class Register extends Component {
                                     <div className="form-group row">
                                         <div className="col-sm-3"></div><div className="col-sm-8"><button type="submit" className="btn btn-primary" onClick={() => this.registerUser()}>Pinjam Buku</button> <button type="submit" className="btn btn-warning">Batal</button></div>
                                     </div>
+
 
                                 </div>
                             </div>
