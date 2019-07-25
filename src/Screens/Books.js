@@ -43,14 +43,14 @@ class Books extends Component {
             modal: !prevState.modal
         }));
     }
-    showFormLogin = (e) => {
-        e.preventDefault()
+    showFormLogin = () => {
+
         this.setState({
             formLogin: true
         })
 
     }
-    hideFormLogin = (e) => {
+    hideFormLogin = () => {
 
         this.setState({
             formLogin: false
@@ -110,7 +110,7 @@ class Books extends Component {
         return (
 
             <div>
-                {this.state.formLogin ? <FormLogin hidelogin={this.hideFormLogin} /> : <a href="" onClick={this.showFormLogin}><i class="fas fa-angle-double-left"></i></a>}
+
 
                 <Header />
                 <Container>
@@ -168,6 +168,8 @@ class Books extends Component {
                                 </ModalFooter>
                             </Form>
                         </Modal>
+                        {(this.props.user === null) ? <FormLogin hideLogin={this.hideFormLogin} showLogin={this.showFormLogin} formLogin={this.state.formLogin} /> : <div></div>}
+                        {/* // {this.state.formLogin ? <FormLogin hidelogin={this.hideFormLogin} /> : <a href="" onClick={this.showFormLogin}><i class="fas fa-angle-double-left"></i></a>} */}
 
                     </div>
 
@@ -187,7 +189,8 @@ class Books extends Component {
 const mapStateToProps = (state) => {
     return {
         books: state.books,
-        jumlahbuku: state.jumlahbuku
+        jumlahbuku: state.jumlahbuku,
+        user: state.user
     }
 
 }

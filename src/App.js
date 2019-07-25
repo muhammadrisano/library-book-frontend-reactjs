@@ -18,7 +18,8 @@ function NoMacth() {
 }
 const globalState = {
   books: [],
-  jumlahbuku: 0
+  jumlahbuku: 0,
+  user: null
 }
 
 // Reducer
@@ -41,6 +42,11 @@ const rootReducer = (state = globalState, action) => {
       return {
         ...state,
         books: action.dataPage.result
+      }
+    case 'LOGIN_USER':
+      return {
+        ...state,
+        user: action.dataLogin
       }
     default:
       return state
