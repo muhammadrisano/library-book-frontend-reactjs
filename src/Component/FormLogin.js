@@ -64,7 +64,7 @@ class FormLogin extends Component {
                 <div className="form-login">
                     <div className="form-content">
                         <div className="icon-login">
-
+                            <img src="https://image.shutterstock.com/image-vector/library-icon-260nw-394498765.jpg" alt="" width="142px" />
                         </div>
                         <br />
                         <form action="post" onSubmit={this.handleLogin}>

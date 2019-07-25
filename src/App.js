@@ -9,6 +9,8 @@ import transaksi from './Screens/Transaksi';
 import riwayat from './Screens/Riyawat';
 import register from './Screens/Register';
 import registerUser from './Screens/RegisterUser';
+import userborrow from './Screens/Userborrow';
+import userHistoryBorrow from './Screens/UserHistoryBorrow';
 function NoMacth() {
   return (
     <div>
@@ -80,6 +82,8 @@ class App extends Component {
               <Route path='/riwayat' exact component={riwayat} />
               <Route path='/register' exact component={register} />
               <Route path='/registeruser' exact component={registerUser} />
+              <Route path='/user/borrow' exact component={userborrow} />
+              <Route path='/user/historyborrow' exact component={userHistoryBorrow} />
               <Route component={NoMacth} />
             </Switch>
           </BrowserRouter>

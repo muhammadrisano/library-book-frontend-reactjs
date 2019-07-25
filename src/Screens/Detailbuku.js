@@ -149,11 +149,15 @@ class Detailbuku extends Component {
                     </div>
                     <div className="header-book">
                         <img src={this.state.image} width="100%" alt="" />
+
                     </div>
 
                 </Jumbotron>
                 <div className="book-child">
                     <img src={this.state.image} alt="" width="150px" className="img-thumbnail" />
+                    <div className="borrow">
+                        <h4>Borrow</h4>
+                    </div>
                 </div>
                 <Container className="body-detailbook">
                     <h2>{this.state.name}</h2>

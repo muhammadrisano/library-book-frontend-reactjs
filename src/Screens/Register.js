@@ -18,12 +18,12 @@ class Register extends Component {
         }
     }
 
-    changeHandler=(e)=>{
+    changeHandler = (e) => {
         this.setState({
             [e.target.name]: e.target.value
         })
     }
-    registerUser=async() => {
+    registerUser = async () => {
         await Api.post("user", {
             card_number: this.state.card_number,
             name: this.state.name,
@@ -40,10 +40,10 @@ class Register extends Component {
                     address: ""
                 })
                 swal({
-                title: "Register!",
-                text: "Register Success !!",
-                icon: "success",
-                button: "oke"
+                    title: "Register!",
+                    text: "Register Success !!",
+                    icon: "success",
+                    button: "oke"
                 })
             })
             .catch(

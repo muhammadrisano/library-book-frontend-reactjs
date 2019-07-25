@@ -15,7 +15,6 @@ class RegisterUser extends Component {
             phone: "",
             job: "",
             address: ""
-
         })
     }
 
@@ -35,7 +34,6 @@ class RegisterUser extends Component {
                 card_number: this.state.card_number,
                 fullname: this.state.fullname,
                 password: this.state.password,
-                password2: this.state.password2,
                 salt: this.state.salt,
                 phone: this.state.phone,
                 job: this.state.job,
