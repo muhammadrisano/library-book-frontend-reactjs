@@ -17,3 +17,12 @@ export const searchBook = (e) => {
         }),
     };
 };
+
+export const borrowUser = (e) => {
+    return {
+        type: 'BORROW_USER',
+        payload: axios.get('http://localhost:4000/loanbooks', e, {
+            headers: { "authorization": "jangan-coba-coba" },
+        }),
+    }
+}

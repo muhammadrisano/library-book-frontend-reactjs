@@ -1,43 +1,43 @@
 const globalState = {
-    token: sessionStorage.getItem('token') || null,
-    id_user: sessionStorage.getItem('id_user') || null,
-    role_id: sessionStorage.getItem('role_id') || null,
-    card_number: sessionStorage.getItem('card_number') || null,
-    user: localStorage.getItem('user'),
+
+    borrowUser =[],
+    borrowAllUser =[],
     isLoading: false,
     isFulfilled: false,
     isRejected: false
 };
 
 
-const users = (state = globalState, action) => {
+const loanbooks = (state = globalState, action) => {
+
+
 
     switch (action.type) {
-        case 'LOGIN_USER_PENDING':
+        case 'GET_BOOK_PAGE_PENDING':
             return {
                 ...state,
                 isLoading: true,
                 isFulfilled: false,
                 isRejected: false,
             };
-        case 'LOGIN_USER_REJECTED':
+        case 'GET_BOOK_PAGE_REJECTED':
             return {
                 ...state,
                 isLoading: false,
                 isRejected: true,
             };
-        case 'LOGIN_USER_FULFILLED':
+        case 'GET_BOOK_PAGE_FULFILLED':
             return {
                 ...state,
                 isLoading: false,
                 isFulfilled: true,
-                user: action.payload.data.result
+                bookshow: action.payload.data.result
             };
+
         default:
             return state;
     }
 
-
 }
 
-export default users;
+export default books;
