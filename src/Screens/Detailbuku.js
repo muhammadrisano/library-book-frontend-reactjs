@@ -9,7 +9,7 @@ import { async } from 'q';
 import axios from 'axios';
 import Api from '../axios/Api'
 import moment from 'moment'
-
+import { borrowUser } from '../redux/actions/loanbooks'
 
 class Detailbuku extends Component {
     constructor(props) {
@@ -91,6 +91,9 @@ class Detailbuku extends Component {
         if (parseInt(this.props.id_user) === 3) {
 
         }
+
+    }
+    borrowUser = () => {
 
     }
 
@@ -293,7 +296,7 @@ class Detailbuku extends Component {
                                             <hr />
                                             <br />
 
-                                            <h5>Tanggal Kembali : {moment().add(6, 'days').calendar()} </h5>
+                                            <h5>Tanggal Kembali : {moment().add(6, 'days').format('ll')} </h5>
                                             <h6>Keterangan</h6>
                                             <p>Keterlambatan akan di denda 5000/hari</p>
                                         </div>
@@ -301,8 +304,7 @@ class Detailbuku extends Component {
 
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                    <button type="button" class="btn btn-primary">Save changes</button>
+                                    <button type="button" class="btn btn-primary" data-dismiss="modal" onClick={this.borrowUser}>Borrow Now</button>
                                 </div>
                             </div>
                         </div>
