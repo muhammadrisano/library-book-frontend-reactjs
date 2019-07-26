@@ -17,12 +17,13 @@ import axios from 'axios'
 import Api from '../axios/Api'
 import FormLogin from '../Component/FormLogin'
 import '../assets/css/books.css'
+import { getBooks } from '../redux/actions/books'
 
 
 class Books extends Component {
 
-    constructor() {
-        super()
+    constructor(props) {
+        super(props)
         this.state = {
             data: Data,
             modal: false,
@@ -33,7 +34,8 @@ class Books extends Component {
             id_category: '',
             bookspage: [],
             books: [],
-            formLogin: false
+            formLogin: false,
+
         }
         this.toggle = this.toggle.bind(this);
     }
@@ -54,6 +56,11 @@ class Books extends Component {
 
         this.setState({
             formLogin: false
+        })
+    }
+    setIduser = (e) => {
+        this.setState({
+            id_user: e
         })
     }
     prosesInput = async (event) => {
@@ -97,16 +104,13 @@ class Books extends Component {
 
 
 
-    async componentDidMount() {
+    componentDidMount = async () => {
 
-        await Api.get('books?page=1')
-            .then(response =>
-                this.props.getBooks(response.data)
-            )
+        await this.props.dispatch(getBooks())
+        console.log(this.props.token)
     }
 
     render() {
-        console.log(this.props.jumlahbuku);
         return (
 
             <div>
@@ -168,7 +172,7 @@ class Books extends Component {
                                 </ModalFooter>
                             </Form>
                         </Modal>
-                        {(this.props.user === null) ? <FormLogin hideLogin={this.hideFormLogin} showLogin={this.showFormLogin} formLogin={this.state.formLogin} /> : <div></div>}
+                        {(this.props.id_user === null) ? <FormLogin hideLogin={this.hideFormLogin} showLogin={this.showFormLogin} formLogin={this.state.formLogin} /> : <div></div>}
                         {/* // {this.state.formLogin ? <FormLogin hidelogin={this.hideFormLogin} /> : <a href="" onClick={this.showFormLogin}><i class="fas fa-angle-double-left"></i></a>} */}
 
                     </div>
@@ -186,17 +190,15 @@ class Books extends Component {
     }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
     return {
-        books: state.books,
-        jumlahbuku: state.jumlahbuku,
-        user: state.user
+
+        jumlahbuku: state.books.jumlahbuku,
+        bookshow: state.books.bookshow,
+        token: state.users.token,
+        id_user: state.users.id_user
     }
 
 }
-const mapDispatchToProps = (dispatch) => {
-    return {
-        getBooks: (data) => dispatch({ type: "GET_ALL", dataBook: data })
-    }
-}
-export default connect(mapStateToProps, mapDispatchToProps)(Books);
+
+export default connect(mapStateToProps)(Books);

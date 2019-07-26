@@ -1,20 +1,14 @@
 import React, { Component } from 'react';
 import { Form, Input, Col, Row } from 'reactstrap';
 import { connect } from 'react-redux';
-
+import { searchBook } from '../redux/actions/books';
 import Api from '../axios/Api'
 class Search extends Component {
 
 
     searchBook = async (e) => {
 
-        await Api.get('books?search=' + e.target.value)
-            .then(response =>
-                this.props.searchBook(response.data.result)
-            )
-            .catch(response =>
-                this.props.searchBook([])
-            )
+        this.props.dispatch(searchBook(e.target.value))
     }
     render() {
         return (
@@ -37,10 +31,6 @@ const mapStateToProps = (state) => {
         books: state.books
     }
 }
-const mapDispatchToProps = (dispatch) => {
-    return {
-        searchBook: (data) => dispatch({ type: "SEARCH_BOOK", search: data })
-    }
-}
 
-export default connect(mapStateToProps, mapDispatchToProps)(Search)
+
+export default connect(mapStateToProps)(Search)

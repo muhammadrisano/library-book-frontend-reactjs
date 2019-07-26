@@ -9,6 +9,7 @@ import { async } from 'q';
 import axios from 'axios';
 import Api from '../axios/Api'
 
+
 class Detailbuku extends Component {
     constructor(props) {
         super(props);
@@ -84,6 +85,13 @@ class Detailbuku extends Component {
             [e.target.name]: e.target.value
         })
     }
+    borrowBook = (e) => {
+        e.preventDefault();
+        if (parseInt(this.props.id_user) === 3) {
+
+        }
+
+    }
 
     updateFinish = async (e) => {
         e.preventDefault();
@@ -155,9 +163,10 @@ class Detailbuku extends Component {
                 </Jumbotron>
                 <div className="book-child">
                     <img src={this.state.image} alt="" width="150px" className="img-thumbnail" />
-                    <div className="borrow">
+                    <Link to="" onClick={this.borrowBook}> <div className="borrow">
                         <h4>Borrow</h4>
                     </div>
+                    </Link>
                 </div>
                 <Container className="body-detailbook">
                     <h2>{this.state.name}</h2>
@@ -225,7 +234,8 @@ class Detailbuku extends Component {
 }
 const mapStateToProps = (state) => {
     return {
-        books: state.books
+        books: state.books.bookshow,
+        id_user: state.users.id_user
     }
 }
 

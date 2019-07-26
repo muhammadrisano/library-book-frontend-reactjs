@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux'
 import {
 
     Navbar,
@@ -15,6 +16,7 @@ import { relative } from 'path';
 class Header extends Component {
 
     render() {
+        console.log(this.props.role_id)
         return (
             <div>
 
@@ -48,18 +50,21 @@ class Header extends Component {
                                 <li class="nav-item">
                                     <a class="nav-link" href="#">Sosial</a>
                                 </li>
-
-                                <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <img src="https://img.icons8.com/bubbles/2x/user.png" style={{ position: "absolute", top: " -8px", left: "-5px" }} width="60px" alt="buku" />
-                                    </a>
-                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                        <a class="dropdown-item" href="#">Borrow</a>
-                                        <a class="dropdown-item" href="#">Confirm Borrow</a>
-                                        <div class="dropdown-divider"></div>
-                                        <a class="dropdown-item" href="#">Logout</a>
-                                    </div>
-                                </li>
+                                {(parseInt(this.props.role_id) === 3) ?
+                                    <li class="nav-item dropdown">
+                                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <img src="https://img.icons8.com/bubbles/2x/user.png" style={{ position: "absolute", top: " -8px", left: "-5px" }} width="60px" alt="buku" />
+                                        </a>
+                                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                            <a class="dropdown-item" href="#">Borrow</a>
+                                            <a class="dropdown-item" href="#">Confirm Borrow</a>
+                                            <div class="dropdown-divider"></div>
+                                            <a class="dropdown-item" href="#">Logout</a>
+                                        </div>
+                                    </li>
+                                    : <li class="nav-item">
+                                        <a class="nav-link" href="#">Sign In</a>
+                                    </li>}
 
                             </ul>
                         </div>
@@ -81,4 +86,16 @@ class Header extends Component {
     }
 }
 
-export default Header;
+const mapStateToProps = state => {
+    return {
+
+        jumlahbuku: state.books.jumlahbuku,
+        bookshow: state.books.bookshow,
+        token: state.users.token,
+        id_user: state.users.id_user,
+        role_id: state.users.role_id
+    }
+
+}
+
+export default connect(mapStateToProps)(Header);
