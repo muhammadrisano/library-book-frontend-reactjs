@@ -3,7 +3,7 @@ import Api from '../axios/Api';
 import { connect } from 'react-redux'
 import swal from 'sweetalert';
 import { loginUser } from '../redux/actions/users'
-
+import { Link } from 'react-router-dom';
 class FormLogin extends Component {
     constructor() {
         super()
@@ -28,6 +28,7 @@ class FormLogin extends Component {
                 sessionStorage.setItem('token', response.action.payload.data.result.token)
                 sessionStorage.setItem('id_user', response.action.payload.data.result.id_user)
                 sessionStorage.setItem('role_id', response.action.payload.data.result.role_id)
+                sessionStorage.setItem('card_number', response.action.payload.data.result.card_number)
                 window.location.reload();
                 swal({
                     title: "Insert !",
@@ -80,8 +81,9 @@ class FormLogin extends Component {
                                 <label htmlFor="password">Password</label>
                                 <input type="password" name="password" id="password" value={this.state.password} className="form-control" placeholder="*****" onChange={this.handleChange} />
                             </div>
-                            <br />
+                            <p>Have you not registered yet ? <Link to="/registeruser">Register Here</Link></p>
                             <button type="submit" className="btn btn-primary btn-block btn-lg">Login</button>
+
                         </form>
                         <div className="arrow"> <a href="" onClick={this.hideForm}><i class="fas fa-angle-double-right"></i></a></div>
 

@@ -1,5 +1,5 @@
 import React from 'react'
-
+import { Link } from 'react-router-dom'
 
 let ListUser = () => {
 
@@ -17,9 +17,9 @@ let ListUser = () => {
 
                 </li>
                 <li class="list-group-item bg-dark text-white"><b>Menu</b></li>
-                <li class="list-group-item">Borrow Book</li>
-                <li class="list-group-item">History Borrow</li>
-                <li class="list-group-item">Edit Profile</li>
+                <Link to="/user/borrow" type="button" class="list-group-item list-group-item-action">Borrow Book</Link>
+                <Link to="/user/historyborrow" class="list-group-item list-group-item-action">History Book</Link>
+                <Link to="" class="list-group-item list-group-item-action">Edit Profile</Link>
                 <li class="list-group-item"><br /><br /><br /><br /><br /><br /><br /><br /><br /></li>
             </ul>
         </div>

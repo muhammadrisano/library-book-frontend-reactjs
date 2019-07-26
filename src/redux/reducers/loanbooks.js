@@ -1,7 +1,7 @@
 const globalState = {
 
-    borrowUser =[],
-    borrowAllUser =[],
+    borrowUser: [],
+    borrowAllUser: [],
     isLoading: false,
     isFulfilled: false,
     isRejected: false
@@ -13,25 +13,24 @@ const loanbooks = (state = globalState, action) => {
 
 
     switch (action.type) {
-        case 'GET_BOOK_PAGE_PENDING':
+        case 'BORROW_USER_PENDING':
             return {
                 ...state,
                 isLoading: true,
                 isFulfilled: false,
                 isRejected: false,
             };
-        case 'GET_BOOK_PAGE_REJECTED':
+        case 'BORROW_USER_REJECTED':
             return {
                 ...state,
                 isLoading: false,
                 isRejected: true,
             };
-        case 'GET_BOOK_PAGE_FULFILLED':
+        case 'BORROW_USER_FULFILLED':
             return {
                 ...state,
                 isLoading: false,
                 isFulfilled: true,
-                bookshow: action.payload.data.result
             };
 
         default:
@@ -40,4 +39,4 @@ const loanbooks = (state = globalState, action) => {
 
 }
 
-export default books;
+export default loanbooks;
