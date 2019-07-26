@@ -92,6 +92,12 @@ filter: brightness(1.1) contrast(1.1)
   top: 300px;
   
 }
+.book-child .btn{
+  position: relative !important;
+  right: 160px;
+  top: 80px;
+  width: 170px;
+}
 .book-child img{
   border-radius: 5px;
   box-shadow: 2px 2px 3px rgba(0, 0, 0, .75);
