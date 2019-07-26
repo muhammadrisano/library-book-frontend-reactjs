@@ -8,6 +8,7 @@ import { SIGTSTP } from 'constants';
 import { async } from 'q';
 import axios from 'axios';
 import Api from '../axios/Api'
+import moment from 'moment'
 
 
 class Detailbuku extends Component {
@@ -163,10 +164,9 @@ class Detailbuku extends Component {
                 </Jumbotron>
                 <div className="book-child">
                     <img src={this.state.image} alt="" width="150px" className="img-thumbnail" />
-                    <Link to="" onClick={this.borrowBook}> <div className="borrow">
-                        <h4>Borrow</h4>
-                    </div>
-                    </Link>
+                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target=".bd-example-modal-lg">
+                        Borrow
+</button>
                 </div>
                 <Container className="body-detailbook">
                     <h2>{this.state.name}</h2>
@@ -227,6 +227,88 @@ class Detailbuku extends Component {
                             </ModalFooter>
                         </Form>
                     </Modal>
+                    {/* modal borrow book */}
+
+                    <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+
+                                    <div className="row">
+                                        <div className="col-4">
+                                            <img src={this.state.image} width="250px" alt="" />
+                                        </div>
+                                        <div className="col-8" >
+                                            <div className="row">
+                                                <div className="col-5">
+                                                    Judul Buku
+            </div>
+
+                                                <div className="col-7">
+                                                    <b> {this.state.name} </b>
+                                                </div>
+                                            </div>
+                                            <div className="row">
+                                                <div className="col-5">
+                                                    Penulis
+            </div>
+                                                <div className="col-7">
+                                                    {this.state.writer}
+                                                </div>
+                                            </div>
+                                            <div className="row">
+                                                <div className="col-5">
+                                                    Kategori
+            </div>
+                                                <div className="col-7">
+                                                    {this.state.name_category}
+                                                </div>
+                                            </div>
+                                            <div className="row">
+                                                <div className="col-5">
+                                                    Deskripsi
+            </div>
+
+                                                <div className="col-7">
+                                                    {this.state.description.slice(0, 300)}
+
+                                                </div>
+                                            </div>
+                                            <div className="row">
+                                                <div className="col-5">
+                                                    Tahun
+            </div>
+
+                                                <div className="col-7">
+                                                    {moment(this.state.updated_at).format('LL')}
+                                                </div>
+                                            </div>
+
+                                            <hr />
+                                            <br />
+
+                                            <h5>Tanggal Kembali : {moment().add(6, 'days').calendar()} </h5>
+                                            <h6>Keterangan</h6>
+                                            <p>Keterlambatan akan di denda 5000/hari</p>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    <button type="button" class="btn btn-primary">Save changes</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* end modal borrow book */}
                 </div>
             </div >
         )
