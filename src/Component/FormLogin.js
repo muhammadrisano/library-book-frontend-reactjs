@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Api from '../axios/Api';
 import { connect } from 'react-redux'
 import swal from 'sweetalert';
-
+import { loginUser } from '../redux/actions/users'
 
 class FormLogin extends Component {
     constructor() {
@@ -19,26 +19,27 @@ class FormLogin extends Component {
         })
     }
     handleLogin = async (e) => {
-        e.preventDefault()
-        await Api.post('user/login', {
+        e.preventDefault();
+        await this.props.dispatch(loginUser({
             email: this.state.email,
             password: this.state.password
-        })
+        }))
             .then((response) => {
-
-                this.props.getLogin(response.data.result)
-                console.log(this.props.user)
+                sessionStorage.setItem('token', response.action.payload.data.result.token)
+                sessionStorage.setItem('id_user', response.action.payload.data.result.id_user)
+                sessionStorage.setItem('role_id', response.action.payload.data.result.role_id)
+                window.location.reload();
                 swal({
-                    title: "Success",
-                    text: "Login Sucsess",
+                    title: "Insert !",
+                    text: "Insert Success !!",
                     icon: "success",
                     button: "oke"
 
-                })
-
-
-
+                });
             })
+
+
+
 
     }
     hideForm = (e) => {
@@ -50,6 +51,7 @@ class FormLogin extends Component {
         this.props.showLogin()
     }
     render() {
+        console.log(this.props.user);
         console.log(this.props.formLogin);
         if (!this.props.formLogin) {
             return (
@@ -67,7 +69,7 @@ class FormLogin extends Component {
                             <img src="https://image.shutterstock.com/image-vector/library-icon-260nw-394498765.jpg" alt="" width="142px" />
                         </div>
                         <br />
-                        <form action="post" onSubmit={this.handleLogin}>
+                        <form action="#" method="post" onSubmit={this.handleLogin}>
                             <h4 className="text-center">Login Here !</h4>
                             <hr />
                             <div className="form-group">
@@ -95,14 +97,9 @@ class FormLogin extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        user: state.user,
-
+        user: state.users.user,
+        bookshow: state.books.bookshow
     }
 
 }
-const mapDispatchToProps = (dispatch) => {
-    return {
-        getLogin: (data) => dispatch({ type: "LOGIN_USER", dataLogin: data })
-    }
-}
-export default connect(mapStateToProps, mapDispatchToProps)(FormLogin);
+export default connect(mapStateToProps)(FormLogin);
