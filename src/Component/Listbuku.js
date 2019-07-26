@@ -12,6 +12,7 @@ class Listbuku extends Component {
         super(props);
         this.state = {
             modal: false,
+            tes: []
         };
 
         this.toggle = this.toggle.bind(this);
@@ -71,6 +72,7 @@ class Listbuku extends Component {
             }
 
         }
+        // let buku = this.props.books.map((item, index) => {
         let buku = this.props.books.map((item, index) => {
             return (
 
@@ -110,8 +112,8 @@ class Listbuku extends Component {
 }
 const mapStateToProps = (state) => {
     return {
-        books: state.books,
-        jumlah: state.jumlah
+        books: state.books.bookshow,
+        jumlah: state.books.jumlah
     }
 }
 
