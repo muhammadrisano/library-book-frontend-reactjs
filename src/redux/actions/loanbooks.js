@@ -19,3 +19,12 @@ export const borrowBookUser = (data, header) => {
         }),
     }
 }
+
+export const getAllborrow = (header) => {
+    return {
+        type: 'GET_ALL_BORROW',
+        payload: axios.get('http://localhost:4000/loanbooks/cardnumber/', {
+            headers: header,
+        }),
+    }
+}

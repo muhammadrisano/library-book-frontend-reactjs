@@ -26,3 +26,11 @@ export const borrowUser = (e) => {
         }),
     }
 }
+export const inputBook = (dataFile) => {
+    return {
+        type: 'INPUT_BOOK',
+        payload: axios.post('http://localhost:4000/books', dataFile, {
+            headers: { "authorization": "jangan-coba-coba" },
+        }),
+    }
+}

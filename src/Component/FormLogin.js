@@ -38,6 +38,14 @@ class FormLogin extends Component {
 
                 });
             })
+            .catch((response) => {
+                swal({
+                    title: "delete",
+                    text: "Delete Failed!",
+                    icon: "warning",
+                    buttons: "oke",
+                })
+            })
 
 
 

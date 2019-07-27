@@ -80,6 +80,23 @@ class Header extends Component {
                                         <a class="nav-link" href="#" onClick={this.showFormLogin}>Sign In</a>
                                     </li>}
 
+                                {(parseInt(this.props.role_id) === 2) ?
+                                    <li class="nav-item dropdown">
+                                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <img src="https://img.icons8.com/bubbles/2x/user.png" style={{ position: "absolute", top: " -8px", left: "-5px" }} width="60px" alt="buku" />
+                                        </a>
+                                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                            <Link to="/librarian/peminjaman" class="dropdown-item" >borrowing</Link>
+                                            <Link to="/librarian/transaksi" class="dropdown-item">loan history</Link>
+                                            <Link to="/librarian/riwayat" class="dropdown-item">loan history</Link>
+                                            <Link to="/librarian/register" class="dropdown-item">Register User</Link>
+                                            <div class="dropdown-divider"></div>
+                                            <a class="dropdown-item" href="#" onClick={this.logout}>Logout</a>
+                                        </div>
+                                    </li>
+                                    : <li class="nav-item">
+                                    </li>}
+
                             </ul>
                         </div>
 
