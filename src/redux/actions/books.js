@@ -1,9 +1,9 @@
 import axios from 'axios';
 
-export const getBooks = () => {
+export const getBooks = (page = 1) => {
     return {
         type: 'GET_BOOK_PAGE',
-        payload: axios.get(`http://localhost:4000/books?page=1`, {
+        payload: axios.get(`http://localhost:4000/books?page=` + page, {
             headers: { "authorization": "jangan-coba-coba" },
         }),
     };
@@ -34,3 +34,5 @@ export const inputBook = (dataFile) => {
         }),
     }
 }
+
+

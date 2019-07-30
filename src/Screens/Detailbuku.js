@@ -185,9 +185,11 @@ class Detailbuku extends Component {
             <div>
 
                 <Jumbotron className="p-0 header-book">
-                    <div className="button-detail">
-                        <a href="#" onClick={this.toggle}><h3>Edit</h3></a>  <a href='#' onClick={() => this.deleteBook()}><h3>Delete</h3></a>
-                    </div>
+                    {(parseInt(this.props.role_id) === 2) ?
+                        <div className="button-detail">
+                            <a href="#" onClick={this.toggle}><h3>Edit</h3></a>  <a href='#' onClick={() => this.deleteBook()}><h3>Delete</h3></a>
+                        </div> : <div></div>
+                    }
                     <div className="header-book">
                         <img src={this.state.image} width="100%" alt="" />
 
@@ -351,7 +353,8 @@ const mapStateToProps = (state) => {
         books: state.books.bookshow,
         id_user: state.users.id_user,
         card_number: state.users.card_number,
-        token: state.users.token
+        token: state.users.token,
+        role_id: state.users.role_id
     }
 }
 

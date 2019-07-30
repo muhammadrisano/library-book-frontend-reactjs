@@ -30,13 +30,7 @@ class FormLogin extends Component {
                 sessionStorage.setItem('role_id', response.action.payload.data.result.role_id)
                 sessionStorage.setItem('card_number', response.action.payload.data.result.card_number)
                 window.location.reload();
-                swal({
-                    title: "Insert !",
-                    text: "Insert Success !!",
-                    icon: "success",
-                    button: "oke"
 
-                });
             })
             .catch((response) => {
                 swal({
