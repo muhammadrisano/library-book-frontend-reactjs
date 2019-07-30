@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
+import { Link } from 'react-router-dom';
 import {
 
     Navbar,
@@ -15,6 +16,18 @@ import { relative } from 'path';
 
 class Header extends Component {
 
+    logout = (e) => {
+        sessionStorage.removeItem("role_id")
+        sessionStorage.removeItem("card_number")
+        sessionStorage.removeItem("id_user")
+        sessionStorage.removeItem("token")
+        window.location.reload();
+
+    }
+    showFormLogin = (e) => {
+        e.preventDefault()
+        return this.props.showLogin()
+    }
     render() {
         console.log(this.props.role_id)
         return (
@@ -56,14 +69,32 @@ class Header extends Component {
                                             <img src="https://img.icons8.com/bubbles/2x/user.png" style={{ position: "absolute", top: " -8px", left: "-5px" }} width="60px" alt="buku" />
                                         </a>
                                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                            <a class="dropdown-item" href="#">Borrow</a>
-                                            <a class="dropdown-item" href="#">Confirm Borrow</a>
+                                            <Link to="/user/borrow" class="dropdown-item" >Borrow</Link>
+                                            <Link to="/user/historyborrow" class="dropdown-item">History Borrow</Link>
+                                            <Link to="/user/editprofile" class="dropdown-item">Edit Profile</Link>
                                             <div class="dropdown-divider"></div>
-                                            <a class="dropdown-item" href="#">Logout</a>
+                                            <a class="dropdown-item" href="#" onClick={this.logout}>Logout</a>
                                         </div>
                                     </li>
                                     : <li class="nav-item">
-                                        <a class="nav-link" href="#">Sign In</a>
+                                        <a class="nav-link" href="#" onClick={this.showFormLogin}>Sign In</a>
+                                    </li>}
+
+                                {(parseInt(this.props.role_id) === 2) ?
+                                    <li class="nav-item dropdown">
+                                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <img src="https://img.icons8.com/bubbles/2x/user.png" style={{ position: "absolute", top: " -8px", left: "-5px" }} width="60px" alt="buku" />
+                                        </a>
+                                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                            <Link to="/librarian/peminjaman" class="dropdown-item" >borrowing</Link>
+                                            <Link to="/librarian/transaksi" class="dropdown-item">loan history</Link>
+                                            <Link to="/librarian/riwayat" class="dropdown-item">loan history</Link>
+                                            <Link to="/librarian/register" class="dropdown-item">Register User</Link>
+                                            <div class="dropdown-divider"></div>
+                                            <a class="dropdown-item" href="#" onClick={this.logout}>Logout</a>
+                                        </div>
+                                    </li>
+                                    : <li class="nav-item">
                                     </li>}
 
                             </ul>

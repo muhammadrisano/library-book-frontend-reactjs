@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 
 import { connect } from 'react-redux';
 import Pagination from "react-js-pagination";
+import { getBooks } from "../redux/actions/books";
 
 import Api from "../axios/Api"
 
@@ -16,10 +17,8 @@ class Paging extends Component {
 
 
     handlePageChange = async (pageNumber) => {
-        await Api.get("http://localhost:4000/books?page=" + pageNumber)
+        await this.props.dispatch(getBooks(pageNumber))
             .then((response) => {
-                this.props.pageList(response.data)
-                this.setState({ activePage: pageNumber })
             }
             )
     }
@@ -31,7 +30,7 @@ class Paging extends Component {
                 <Pagination
                     activePage={this.state.activePage}
                     itemsCountPerPage={12}
-                    totalItemsCount={this.props.jumlahbuku}
+                    totalItemsCount={this.props.jumlah}
                     pageRangeDisplayed={5}
                     itemClass="page-item"
                     linkClass="page-link"
@@ -45,13 +44,9 @@ class Paging extends Component {
 }
 const mapStateToProps = (state) => {
     return {
-        books: state.books,
-        jumlahbuku: state.jumlahbuku
+        bookshow: state.books.bookshow,
+        jumlah: state.books.jumlah
     }
 }
-const mapDispatchToProps = (dispatch) => {
-    return {
-        pageList: (data) => dispatch({ type: "PAGE_LIST", dataPage: data })
-    }
-}
-export default connect(mapStateToProps, mapDispatchToProps)(Paging)
+
+export default connect(mapStateToProps)(Paging)

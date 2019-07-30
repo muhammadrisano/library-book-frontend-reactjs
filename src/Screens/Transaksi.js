@@ -3,6 +3,8 @@ import Header from '../Component/Header'
 import ListLeft from '../Component/ListLeft'
 import Api from '../axios/Api'
 import swal from 'sweetalert';
+import { getAllborrow } from '../redux/actions/loanbooks';
+import { connect } from 'react-redux'
 
 
 
@@ -126,11 +128,15 @@ class Transaksi extends Component {
         return hitung
     }
     componentDidMount() {
-        Api.get("loanbooks")
+        this.props.dispatch(getAllborrow({
+            "authorization": "jangan-coba-coba",
+            "x-access-token": "bearer " + this.props.token,
+            "x-control-user": this.props.id_user
+        }))
             .then((response) => {
-
+                console.log(response.action.payload.data.result);
                 this.setState({
-                    transaksiBuku: response.data.result
+                    transaksiBuku: response.action.payload.data.result
                 })
             })
     }
@@ -297,5 +303,14 @@ class Transaksi extends Component {
 
 
 }
+const mapStateToProps = state => {
+    return {
 
-export default Transaksi
+        token: state.users.token,
+        card_number: state.users.card_number,
+        id_user: state.users.id_user
+    }
+
+}
+
+export default connect(mapStateToProps)(Transaksi);
