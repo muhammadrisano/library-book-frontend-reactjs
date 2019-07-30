@@ -2,18 +2,18 @@ import React, { Component } from 'react';
 import { BrowserRouter, Switch, Route, Link, Redirect } from 'react-router-dom'
 import books from './Screens/Books';
 import detailbook from './Screens/Detailbuku';
-import { Provider } from 'react-redux';
-import peminjaman from './Screens/Peminjaman';
-import transaksi from './Screens/Transaksi';
-import riwayat from './Screens/Riyawat';
-import register from './Screens/Register';
+import { connect } from 'react-redux'
+import Peminjaman from './Screens/Peminjaman';
+import Transaksi from './Screens/Transaksi';
+import Riwayat from './Screens/Riyawat';
+import Register from './Screens/Register';
 import registerUser from './Screens/RegisterUser';
-import userborrow from './Screens/Userborrow';
-import userHistoryBorrow from './Screens/UserHistoryBorrow';
+import Userborrow from './Screens/Userborrow';
+import UserHistoryBorrow from './Screens/UserHistoryBorrow';
 import { PersistGate } from 'redux-persist/integration/react'
 // import { persistStore, persistReducer } from 'redux-persist';
 // import storage from 'redux-persist/lib/storage'
-import store from './redux/store';
+
 
 
 function NoMacth() {
@@ -35,25 +35,39 @@ class App extends Component {
 
     return (
       <div>
-        <Provider store={store}>
 
-          <BrowserRouter>
-            <Switch>
-              <Redirect exact from="/" to="/books" />
-              <Route path='/books' exact component={books} />
-              <Route path='/books/:idbook' exact component={detailbook} />
-              <Route path='/peminjaman' exact component={peminjaman} />
-              <Route path='/transaksi' exact component={transaksi} />
-              <Route path='/riwayat' exact component={riwayat} />
-              <Route path='/register' exact component={register} />
-              <Route path='/registeruser' exact component={registerUser} />
-              <Route path='/user/borrow' exact component={userborrow} />
-              <Route path='/user/historyborrow' exact component={userHistoryBorrow} />
-              <Route component={NoMacth} />
-            </Switch>
-          </BrowserRouter>
 
-        </Provider>
+        <BrowserRouter>
+          <Switch>
+            <Redirect exact from="/" to="/books" />
+            <Route path='/books' exact component={books} />
+            <Route path='/books/:idbook' exact component={detailbook} />
+            <Route path='/librarian/peminjaman' exact render={() => (
+              parseInt(this.props.role_id) === 2 ? <Peminjaman /> : <Redirect to='/books' />
+            )} />
+            <Route path='/librarian/transaksi' exact render={() => (
+              parseInt(this.props.role_id) === 2 ? <Transaksi /> : <Redirect to='/books' />
+            )} />
+            <Route path='/librarian/riwayat' exact render={() => (
+              parseInt(this.props.role_id) === 2 ? <Riwayat /> : <Redirect to='/books' />
+            )} />
+
+            <Route path='/librarian/register' exact render={() => (
+              parseInt(this.props.role_id) === 2 ? <Register /> : <Redirect to='/books' />
+            )} />
+            <Route path='/registeruser' exact component={registerUser} />
+            <Route path='/user/borrow' exact render={() => (
+              parseInt(this.props.role_id) === 3 ? <Userborrow /> : <Redirect to='/books' />
+            )} />
+            <Route path='/user/historyborrow' exact render={() => (
+              parseInt(this.props.role_id) === 3 ? <UserHistoryBorrow /> : <Redirect to='/books' />
+            )} />
+
+            <Route component={NoMacth} />
+          </Switch>
+        </BrowserRouter>
+
+
       </div >
     )
   }
@@ -61,4 +75,12 @@ class App extends Component {
 
 
 
-export default App;
+const mapStateToProps = state => {
+  return {
+    token: state.users.token,
+    role_id: state.users.role_id
+  }
+
+}
+
+export default connect(mapStateToProps)(App);

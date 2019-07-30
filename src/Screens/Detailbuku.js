@@ -9,7 +9,7 @@ import { async } from 'q';
 import axios from 'axios';
 import Api from '../axios/Api'
 import moment from 'moment'
-
+import { borrowuser } from '../redux/actions/loanbooks'
 
 class Detailbuku extends Component {
     constructor(props) {
@@ -93,6 +93,38 @@ class Detailbuku extends Component {
         }
 
     }
+    borrowUser = async () => {
+        await this.props.dispatch(borrowuser({
+            card_number: this.props.card_number,
+            id_book: this.state.id_book,
+            expired_date: moment().add(6, 'days').format('l'),
+            forfeit: 0,
+            information: "PENDING",
+            updated_at: new Date()
+        }, {
+                "authorization": "jangan-coba-coba",
+                "x-access-token": "bearer " + this.props.token,
+                "x-control-user": this.props.id_user
+            }))
+            .then((response) => {
+                swal({
+                    title: "Borrow",
+                    text: "Borrow Book Success !!",
+                    icon: "success",
+                    button: "oke"
+
+                })
+                this.props.history.push('/books')
+            })
+            .catch((error) => {
+                swal({
+                    title: "Borrow",
+                    text: "Borrow Book Failed!",
+                    icon: "warning",
+                    buttons: "oke",
+                })
+            })
+    }
 
     updateFinish = async (e) => {
         e.preventDefault();
@@ -148,14 +180,16 @@ class Detailbuku extends Component {
 
     }
     render() {
-        console.log(this.props.books);
+        console.log(this.props.token);
         return (
             <div>
 
                 <Jumbotron className="p-0 header-book">
-                    <div className="button-detail">
-                        <a href="#" onClick={this.toggle}><h3>Edit</h3></a>  <a href='#' onClick={() => this.deleteBook()}><h3>Delete</h3></a>
-                    </div>
+                    {(parseInt(this.props.role_id) === 2) ?
+                        <div className="button-detail">
+                            <a href="#" onClick={this.toggle}><h3>Edit</h3></a>  <a href='#' onClick={() => this.deleteBook()}><h3>Delete</h3></a>
+                        </div> : <div></div>
+                    }
                     <div className="header-book">
                         <img src={this.state.image} width="100%" alt="" />
 
@@ -293,7 +327,8 @@ class Detailbuku extends Component {
                                             <hr />
                                             <br />
 
-                                            <h5>Tanggal Kembali : {moment().add(6, 'days').calendar()} </h5>
+                                            <h5>Tanggal Kembali : {moment().add(6, 'days').format('ll')} </h5>
+                                            <br />
                                             <h6>Keterangan</h6>
                                             <p>Keterlambatan akan di denda 5000/hari</p>
                                         </div>
@@ -301,8 +336,7 @@ class Detailbuku extends Component {
 
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                    <button type="button" class="btn btn-primary">Save changes</button>
+                                    <button type="button" class="btn btn-primary" data-dismiss="modal" onClick={this.borrowUser}>Borrow Now</button>
                                 </div>
                             </div>
                         </div>
@@ -317,7 +351,10 @@ class Detailbuku extends Component {
 const mapStateToProps = (state) => {
     return {
         books: state.books.bookshow,
-        id_user: state.users.id_user
+        id_user: state.users.id_user,
+        card_number: state.users.card_number,
+        token: state.users.token,
+        role_id: state.users.role_id
     }
 }
 

@@ -4,6 +4,8 @@ import Api from '../axios/Api';
 import '../assets/css/user.css';
 import ListUser from '../Component/ListUser';
 import moment from 'moment';
+import { connect } from 'react-redux'
+import { borrowBookUser } from '../redux/actions/loanbooks'
 
 class UserHistoryBorrow extends Component {
 
@@ -16,10 +18,14 @@ class UserHistoryBorrow extends Component {
     }
 
     async componentDidMount() {
-        await Api.get('loanbooks/cardnumber/12341234')
+        await this.props.dispatch(borrowBookUser(this.props.card_number, {
+            "authorization": "jangan-coba-coba",
+            "x-access-token": "bearer " + this.props.token,
+            "x-control-user": this.props.id_user
+        }))
             .then((response) => {
                 let bookShow = []
-                let buku = response.data.result.map((item) => {
+                let buku = response.action.payload.data.result.map((item) => {
                     if (item.information === "SELESAI") {
                         return bookShow.push(item)
                     }
@@ -87,5 +93,14 @@ class UserHistoryBorrow extends Component {
     }
 
 }
+const mapStateToProps = state => {
+    return {
 
-export default UserHistoryBorrow;
+        token: state.users.token,
+        card_number: state.users.card_number,
+        id_user: state.users.id_user
+    }
+
+}
+
+export default connect(mapStateToProps)(UserHistoryBorrow);

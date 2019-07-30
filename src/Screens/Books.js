@@ -18,7 +18,7 @@ import Api from '../axios/Api'
 import FormLogin from '../Component/FormLogin'
 import '../assets/css/books.css'
 import { getBooks } from '../redux/actions/books'
-
+import { inputBook } from '../redux/actions/books'
 
 class Books extends Component {
 
@@ -35,6 +35,7 @@ class Books extends Component {
             bookspage: [],
             books: [],
             formLogin: false,
+            selectedFile: null
 
         }
         this.toggle = this.toggle.bind(this);
@@ -58,6 +59,13 @@ class Books extends Component {
             formLogin: false
         })
     }
+    onChangeFile = (e) => {
+        console.log(e.target.files[0])
+        this.setState({
+            selectedFile: e.target.files[0],
+            loaded: 0,
+        })
+    }
     setIduser = (e) => {
         this.setState({
             id_user: e
@@ -65,17 +73,16 @@ class Books extends Component {
     }
     prosesInput = async (event) => {
         event.preventDefault()
+        const dataFile = new FormData()
+        dataFile.append('image', this.state.selectedFile)
+        dataFile.append('name', this.state.name)
+        dataFile.append('writer', this.state.location)
+        dataFile.append('location', this.state.writer)
+        dataFile.append('description', this.state.description)
+        dataFile.append('id_category', this.state.id_category)
 
         console.log(this.state)
-
-        await Api.post("books", {
-            name: this.state.name,
-            image: this.state.image,
-            writer: this.state.writer,
-            description: this.state.description,
-            location: this.state.location,
-            id_category: this.state.id_category,
-        })
+        await this.props.dispatch(inputBook(dataFile))
             .then((response) => {
                 console.log(response.data)
                 swal({
@@ -111,32 +118,33 @@ class Books extends Component {
     }
 
     render() {
+        console.log(this.props.role_id)
         return (
 
             <div>
 
 
-                <Header />
+                <Header showLogin={this.showFormLogin} />
                 <Container>
                     <Search />
                     <div>
                         <div className="button-modal">
-                            <Button onClick={this.toggle}>{this.props.buttonLabel}ADD</Button>
+                            {(parseInt(this.props.role_id) === 2) ? <Button onClick={this.toggle}>{this.props.buttonLabel}ADD</Button> : <div></div>}
                         </div>
                         <Modal isOpen={this.state.modal} toggle={this.toggle} className="{this.props.className} modal-lg">
                             <Form onSubmit={this.prosesInput}>
                                 <ModalHeader toggle={this.toggle}><b>Add Data</b></ModalHeader>
                                 <ModalBody>
                                     <FormGroup row>
-                                        <Label for="exampleEmail" sm={3} size="lg">Url Image</Label>
+                                        <Label for="exampleEmail" sm={3} size="lg">Image</Label>
                                         <Col sm={9}>
-                                            <Input type="text" name="image" id="image" placeholder="Url Image.." bsSize="lg" value={this.state.image} onChange={this.handlerChange} />
+                                            <Input type="file" name="file" id="file" placeholder="Url Image.." bsSize="lg" onChange={this.onChangeFile} />
                                         </Col>
                                     </FormGroup>
                                     <FormGroup row>
-                                        <Label for="exampleEmail" sm={3} size="lg">Nama Buku</Label>
+                                        <Label for="name" sm={3} size="lg">Nama Buku</Label>
                                         <Col sm={9}>
-                                            <Input type="text" name="name" id="title" placeholder="Title..." bsSize="lg" value={this.state.name} onChange={this.handlerChange} />
+                                            <Input type="text" name="name" id="name" placeholder="name" bsSize="lg" value={this.state.name} onChange={this.handlerChange} />
                                         </Col>
                                     </FormGroup>
                                     <FormGroup row>
@@ -196,7 +204,8 @@ const mapStateToProps = state => {
         jumlahbuku: state.books.jumlahbuku,
         bookshow: state.books.bookshow,
         token: state.users.token,
-        id_user: state.users.id_user
+        id_user: state.users.id_user,
+        role_id: state.users.role_id
     }
 
 }

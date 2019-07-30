@@ -5,7 +5,8 @@ const globalState = {
     user: null,
     isLoading: false,
     isFulfilled: false,
-    isRejected: false
+    isRejected: false,
+    jumlah: 0
 };
 
 
@@ -32,7 +33,8 @@ const books = (state = globalState, action) => {
                 ...state,
                 isLoading: false,
                 isFulfilled: true,
-                bookshow: action.payload.data.result
+                bookshow: action.payload.data.result,
+                jumlah: action.payload.data.jumlah
             };
         case 'SEARCH_BOOK_PENDING':
             return {
