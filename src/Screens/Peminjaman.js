@@ -6,6 +6,11 @@ import axios from 'axios'
 import { async } from 'q';
 import Api from '../axios/Api'
 import swal from 'sweetalert';
+import { getUser } from '../redux/actions/users'
+import { connect } from 'react-redux'
+import { borrowuser } from '../redux/actions/loanbooks'
+import moment from 'moment'
+
 class Peminjaman extends Component {
     constructor() {
         super()
@@ -33,13 +38,17 @@ class Peminjaman extends Component {
 
     pinjamBuku = async () => {
         console.log(this.state)
-        await Api.post('loanbooks', {
+        this.props.dispatch(borrowuser({
             card_number: this.state.card_number,
             id_book: this.state.id_book,
             expired_date: this.state.tgl_pengembalian,
             forfeit: 0,
             information: 'DIPINJAM',
-        })
+        }, {
+                "authorization": "jangan-coba-coba",
+                "x-access-token": "bearer " + this.props.token,
+                "x-control-user": this.props.id_user
+            }))
             .then((response) => {
                 swal({
                     title: "Peminjaman!",
@@ -48,7 +57,17 @@ class Peminjaman extends Component {
                     button: "oke"
 
                 })
-                this.props.history.push('/transaksi')
+                this.setState({
+                    id_user: '',
+                    card_number: '',
+                    name: '',
+                    phone: '',
+                    address: '',
+                    id_book: '',
+                    nama_buku: '',
+                    writer: '',
+                })
+
             })
             .catch(
                 swal({
@@ -60,12 +79,10 @@ class Peminjaman extends Component {
             )
     }
     componentWillMount() {
-        let hari = this.state.tgl.getDate() + 6
-        let bulan = this.state.tgl.getMonth() + 1
-        let tahun = this.state.tgl.getFullYear()
         this.setState({
-            tgl_pengembalian: `${tahun}-0${bulan}-${hari}`
+            tgl_pengembalian: moment().add(6, 'days').format('l')
         })
+
     }
     handlerCange = (e) => {
         this.setState({
@@ -73,10 +90,17 @@ class Peminjaman extends Component {
         })
     }
     cariPeminjam = async (e) => {
-        await Api.get("user?search=" + e.target.value)
+
+        await this.props.dispatch(getUser(e.target.value,
+            {
+                "authorization": "jangan-coba-coba",
+                "x-access-token": "bearer " + this.props.token,
+                "x-control-user": this.props.id_user
+            }
+        ))
             .then((response) => {
                 this.setState({
-                    cariPeminjam: response.data.result
+                    cariPeminjam: response.action.payload.data.result
                 })
             })
             .catch(
@@ -84,6 +108,17 @@ class Peminjaman extends Component {
                     cariPeminjam: []
                 })
             )
+        // await Api.get("user?search=" + e.target.value)
+        //     .then((response) => {
+        //         this.setState({
+        //             cariPeminjam: response.data.result
+        //         })
+        //     })
+        //     .catch(
+        //         this.setState({
+        //             cariPeminjam: []
+        //         })
+        //     )
     }
 
     cariBuku = async (e) => {
@@ -187,7 +222,7 @@ class Peminjaman extends Component {
                                 <div className="form-group row">
                                     <label for="inputtext3" class="col-sm-3 col-form-label" >Tanggal Pengembalian</label>
                                     <div class="col-sm-8">
-                                        <input type="date" class="form-control" id="tanggal" name="tanggal" onChange={this.handlerCange} value={this.state.tgl_pengembalian} />
+                                        <input type="text" class="form-control" id="tanggal" name="tanggal" value={this.state.tgl_pengembalian} />
 
                                     </div>
                                 </div>
@@ -323,4 +358,15 @@ class Peminjaman extends Component {
 
 
 }
-export default Peminjaman
+
+const mapStateToProps = state => {
+    return {
+
+        token: state.users.token,
+        card_number: state.users.card_number,
+        id_user: state.users.id_user
+    }
+
+}
+
+export default connect(mapStateToProps)(Peminjaman);

@@ -29,6 +29,8 @@ class FormLogin extends Component {
                 sessionStorage.setItem('id_user', response.action.payload.data.result.id_user)
                 sessionStorage.setItem('role_id', response.action.payload.data.result.role_id)
                 sessionStorage.setItem('card_number', response.action.payload.data.result.card_number)
+                sessionStorage.setItem('photo', response.action.payload.data.result.photo)
+                sessionStorage.setItem('fullname', response.action.payload.data.result.fullname)
                 window.location.reload();
 
             })

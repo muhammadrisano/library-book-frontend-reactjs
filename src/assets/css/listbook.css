@@ -1,0 +1,26 @@
+.card-listbook{
+    position: relative;
+    border-radius: 100px;
+}
+.empty-label{
+    height: 50px;
+    background-color: rgba(235, 49, 43, 0.7);
+    position: absolute;
+    margin-right: -8px;
+    width: 100%;
+    border-radius: 5px;
+    top:50%;
+    text-align: center;
+    line-height: 50px;
+    color: white;
+    font-size: 20px;
+}
+.list-category{
+    background-color: rgb(175, 152, 108);
+    margin-top: -30px;
+    color: white;
+    text-align: center;
+    font-size: 12px;
+    border-bottom-left-radius: 30px;
+    border-bottom-right-radius: 30px;
+}
