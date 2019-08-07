@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import { async } from 'q';
 import Axios from 'axios';
 import Api from '../axios/Api';
+import '../assets/css/listbook.css'
 
 class Listbuku extends Component {
     constructor(props) {
@@ -73,19 +74,29 @@ class Listbuku extends Component {
 
         }
         // let buku = this.props.books.map((item, index) => {
+        console.log(this.props.books)
         let buku = this.props.books.map((item, index) => {
             return (
 
                 <Col md={3} className="p-4">
 
                     <Card key={item.id_book} className="cardbuku">
+
                         <Button close className="btn-close" onClick={() => this.hapusBook(item.id_book)} />
                         <Link to={'/books/' + item.id_book}>
                             <CardImg top width="100%" src={item.image} alt="Card image cap" className="cardimg" />
                         </Link>
+                        {(item.status === 0) ?
+                            <div className="empty-label">
+                                Empty
+                        </div>
+                            : <div></div>}
                         <CardBody className="text-center">
                             <CardTitle>{(item.name.length > 25) ? item.name.slice(0, 25) + "..." : <div>{item.name}</div>}</CardTitle>
                         </CardBody>
+                        <div className="list-category">
+                            {item.name_category}
+                        </div>
                     </Card>
                 </Col>
             )
@@ -103,10 +114,6 @@ class Listbuku extends Component {
                     </Row>
                 </Col >
             </Row >
-
-
-
-
         )
     }
 }

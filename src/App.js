@@ -10,7 +10,9 @@ import Register from './Screens/Register';
 import registerUser from './Screens/RegisterUser';
 import Userborrow from './Screens/Userborrow';
 import UserHistoryBorrow from './Screens/UserHistoryBorrow';
+import Confirmborrow from './Screens/Confirmborrow';
 import { PersistGate } from 'redux-persist/integration/react'
+import Editprofile from './Screens/Editprofile'
 // import { persistStore, persistReducer } from 'redux-persist';
 // import storage from 'redux-persist/lib/storage'
 
@@ -51,6 +53,9 @@ class App extends Component {
             <Route path='/librarian/riwayat' exact render={() => (
               parseInt(this.props.role_id) === 2 ? <Riwayat /> : <Redirect to='/books' />
             )} />
+            <Route path='/librarian/Confirmborrow' exact render={() => (
+              parseInt(this.props.role_id) === 2 ? <Confirmborrow /> : <Redirect to='/books' />
+            )} />
 
             <Route path='/librarian/register' exact render={() => (
               parseInt(this.props.role_id) === 2 ? <Register /> : <Redirect to='/books' />
@@ -61,6 +66,9 @@ class App extends Component {
             )} />
             <Route path='/user/historyborrow' exact render={() => (
               parseInt(this.props.role_id) === 3 ? <UserHistoryBorrow /> : <Redirect to='/books' />
+            )} />
+            <Route path='/user/editprofile' exact render={() => (
+              parseInt(this.props.role_id) === 3 ? <Editprofile /> : <Redirect to='/books' />
             )} />
 
             <Route component={NoMacth} />

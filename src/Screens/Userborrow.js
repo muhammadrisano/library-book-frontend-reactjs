@@ -6,6 +6,8 @@ import ListUser from '../Component/ListUser';
 import moment from 'moment';
 import { connect } from 'react-redux'
 import { borrowBookUser } from '../redux/actions/loanbooks'
+import swal from 'sweetalert'
+import { borrowuser } from '../redux/actions/loanbooks'
 
 class Userborrow extends Component {
 
@@ -37,6 +39,31 @@ class Userborrow extends Component {
             )
     }
 
+    borrowBook = async () => {
+        await this.props.dispatch(borrowuser({
+            card_number: this.props.card_number,
+            id_book: this.state.id_book,
+            expired_date: this.state.tglSkarang,
+            forfeit: 0,
+            information: "PENDING",
+            updated_at: new Date()
+        }, {
+                "authorization": "jangan-coba-coba",
+                "x-access-token": "bearer " + this.props.token,
+                "x-control-user": this.props.id_user
+            }))
+            .then((response) => {
+                swal({
+                    title: "Borrow",
+                    text: "Borrow Book Success !!",
+                    icon: "success",
+                    button: "oke"
+
+                })
+               window.location.reload();
+            })
+    }
+
     pilihBuku = (id_book) => {
         let bukuPilih = this.state.cariBuku.find((item) => {
             return item.id_book == id_book
@@ -51,7 +78,7 @@ class Userborrow extends Component {
     }
 
     componentWillMount() {
-        let tglSkarang = moment().add(10, 'days').calendar().split("/").reverse().join("-")
+        let tglSkarang = moment().add(6, 'days').format('l')
         this.setState({
             tglSkarang: tglSkarang
         })
@@ -117,12 +144,12 @@ class Userborrow extends Component {
                                 <div className="form-group row">
                                     <label for="inputtext3" class="col-sm-3 col-form-label" >Tanggal Pengembalian</label>
                                     <div class="col-sm-8">
-                                        <input type="date" class="form-control" id="tanggal" name="tanggal" onChange={this.handlerCange} value={this.state.tglSkarang} disabled />
+                                        <input type="text" class="form-control" id="tanggal" name="tanggal" onChange={this.handlerCange} value={this.state.tglSkarang} disabled />
 
                                     </div>
                                 </div>
                                 <div className="form-group row">
-                                    <div className="col-sm-3"></div><div className="col-sm-8"><button type="submit" className="btn btn-primary" onClick={() => this.pinjamBuku()}>Pinjam Buku</button> <button type="submit" className="btn btn-warning">Batal</button></div>
+                                    <div className="col-sm-3"></div><div className="col-sm-8"><button type="submit" className="btn btn-primary" onClick={() => this.borrowBook()}>Borrow Book</button> <button type="submit" className="btn btn-warning">Batal</button></div>
                                 </div>
                                 <hr />
                                 <h5>Daftar Peminjaman Buku Anda</h5>
@@ -196,8 +223,19 @@ class Userborrow extends Component {
                                                     <td>{item.id_book}</td>
                                                     <td>{item.name}</td>
                                                     <td>{item.writer}</td>
-                                                    <td><img src={item.image} width="100px" /></td>
-                                                    <td><button className="btn btn-success" onClick={() => this.pilihBuku(item.id_book)} data-dismiss="modal">Pilih</button></td>
+
+                                                    <td><div className="border-image-borrow">
+                                                        <img src={item.image} width="100px" />
+                                                        {(item.status !== 0) ? <div></div> : <div className="label-empty"> Empty</div>}
+
+                                                    </div>
+                                                    </td>
+                                                    <td>
+                                                        {(item.status !== 0) ? <button className="btn btn-success" onClick={() => this.pilihBuku(item.id_book)} data-dismiss="modal">Pilih</button> : <button className="btn btn-success" disabled>Pilih</button>}
+
+                                                    </td>
+
+
                                                 </tr>
 
                                             )}

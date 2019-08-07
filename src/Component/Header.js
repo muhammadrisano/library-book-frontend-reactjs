@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom';
+import '../assets/css/header.css'
 import {
 
     Navbar,
@@ -21,6 +22,8 @@ class Header extends Component {
         sessionStorage.removeItem("card_number")
         sessionStorage.removeItem("id_user")
         sessionStorage.removeItem("token")
+        sessionStorage.removeItem("photo")
+        sessionStorage.removeItem("fullname")
         window.location.reload();
 
     }
@@ -35,7 +38,7 @@ class Header extends Component {
 
                 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
                     <div className="container">
-                        <a class="navbar-brand" href="#">Risano Library Books</a>
+                        <a class="navbar-brand" href="http://localhost:3000/books">Risano Library Books</a>
 
                         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                             <span class="navbar-toggler-icon"></span>
@@ -66,7 +69,9 @@ class Header extends Component {
                                 {(parseInt(this.props.role_id) === 3) ?
                                     <li class="nav-item dropdown">
                                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            <img src="https://img.icons8.com/bubbles/2x/user.png" style={{ position: "absolute", top: " -8px", left: "-5px" }} width="60px" alt="buku" />
+                                            <div className="photo-header">
+                                                <img src={this.props.photo} style={{ position: "absolute", top: " -3px", left: "-5px" }} width="60px" alt="buku" />
+                                            </div>
                                         </a>
                                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                             <Link to="/user/borrow" class="dropdown-item" >Borrow</Link>
@@ -83,7 +88,10 @@ class Header extends Component {
                                 {(parseInt(this.props.role_id) === 2) ?
                                     <li class="nav-item dropdown">
                                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            <img src="https://img.icons8.com/bubbles/2x/user.png" style={{ position: "absolute", top: " -8px", left: "-5px" }} width="60px" alt="buku" />
+
+                                            <div className="photo-header">
+                                                <img src={this.props.photo} style={{ position: "absolute", top: " -3px", left: "-5px" }} width="60px" alt="buku" />
+                                            </div>
                                         </a>
                                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                             <Link to="/librarian/peminjaman" class="dropdown-item" >borrowing</Link>
@@ -124,7 +132,8 @@ const mapStateToProps = state => {
         bookshow: state.books.bookshow,
         token: state.users.token,
         id_user: state.users.id_user,
-        role_id: state.users.role_id
+        role_id: state.users.role_id,
+        photo: state.users.photo
     }
 
 }

@@ -19,6 +19,7 @@ class Paging extends Component {
     handlePageChange = async (pageNumber) => {
         await this.props.dispatch(getBooks(pageNumber))
             .then((response) => {
+                this.setState({ activePage: pageNumber });
             }
             )
     }

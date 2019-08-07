@@ -10,6 +10,7 @@ import axios from 'axios';
 import Api from '../axios/Api'
 import moment from 'moment'
 import { borrowuser } from '../redux/actions/loanbooks'
+import '../assets/css/detailbook.css'
 
 class Detailbuku extends Component {
     constructor(props) {
@@ -198,9 +199,11 @@ class Detailbuku extends Component {
                 </Jumbotron>
                 <div className="book-child">
                     <img src={this.state.image} alt="" width="150px" className="img-thumbnail" />
-                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target=".bd-example-modal-lg">
-                        Borrow
-</button>
+                    {(parseInt(this.state.status) !== 0) ?
+                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target=".bd-example-modal-lg">
+                            Borrow
+                    </button> : <div className="buttom-empty"><p>Sorry!! Empty</p></div>
+                    }
                 </div>
                 <Container className="body-detailbook">
                     <h2>{this.state.name}</h2>

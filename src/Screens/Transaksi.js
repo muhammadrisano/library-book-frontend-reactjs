@@ -5,6 +5,8 @@ import Api from '../axios/Api'
 import swal from 'sweetalert';
 import { getAllborrow } from '../redux/actions/loanbooks';
 import { connect } from 'react-redux'
+import { updateBorrow } from '../redux/actions/loanbooks';
+import { async } from 'q';
 
 
 
@@ -29,33 +31,60 @@ class Transaksi extends Component {
 
         }
     }
-    updatePengembalian = async (e) => {
+    updateBorrow = async (e) => {
+        console.log(this.state.id_book);
+        console.log(this.state.denda);
+        console.log(this.state.id_loanbook);
 
-
-        await Api.patch('loanbooks/' + this.state.id_loanbook, {
-            card_number: this.state.card_number,
-            id_book: this.state.id_book,
-            expired_date: this.state.expired_date,
-            forfeit: this.state.denda,
-            information: "SELESAI"
-        })
-            .then((response) => {
+        this.props.dispatch(updateBorrow(
+            this.state.id_loanbook, {
+                forfeit: this.state.denda,
+                id_book: this.state.id_book
+            }
+        ))
+            .then((result) => {
                 swal({
                     title: "Pengembalian!",
                     text: "Pengembalian Success !!",
                     icon: "success",
                     button: "oke"
                 })
-
+                this.showBooksTrans()
             })
             .catch(
                 swal({
                     title: "Pengembalian",
-                    text: "Pengembalian!",
+                    text: "Pengembalian Gagal!",
                     icon: "warning",
                     buttons: "oke",
                 })
+
             )
+
+        // await Api.patch('loanbooks/' + this.state.id_loanbook, {
+        //     card_number: this.state.card_number,
+        //     id_book: this.state.id_book,
+        //     expired_date: this.state.expired_date,
+        //     forfeit: this.state.denda,
+        //     information: "SELESAI"
+        // })
+        //     .then((response) => {
+        //         swal({
+        //             title: "Pengembalian!",
+        //             text: "Pengembalian Success !!",
+        //             icon: "success",
+        //             button: "oke"
+        //         })
+
+        //     })
+        //     .catch(
+        //         swal({
+        //             title: "Pengembalian",
+        //             text: "Pengembalian!",
+        //             icon: "warning",
+        //             buttons: "oke",
+        //         })
+        //     )
 
 
     }
@@ -74,15 +103,17 @@ class Transaksi extends Component {
         let tanggal = tgl.getDate();
         let bulan = tgl.getMonth() + 1;
         let tahun = tgl.getFullYear();
-        let expired = pilihTransaksi.expired_date.split('-')
+        let expired = pilihTransaksi.expired_date.split('/')
 
-        if (parseInt(bulan) > parseInt(expired[1])) {
-            hitung += (parseInt(bulan) - parseInt(expired[1])) * 5000 * 30
-            hariTerlambat += (parseInt(bulan) - parseInt(expired[1])) * 30
-            hariTerlambat += parseInt(expired[2])
-        } else if (parseInt(bulan) == parseInt(expired[1]) && parseInt(tanggal) > parseInt(expired[2])) {
-            hitung += (parseInt(tanggal) - parseInt(expired[2])) * 5000
-            hariTerlambat += parseInt(tanggal) - parseInt(expired[2])
+        if (parseInt(bulan) > parseInt(expired[0])) {
+
+            hariTerlambat += (parseInt(bulan) - parseInt(expired[0])) * 30
+            hariTerlambat += parseInt(expired[1])
+            hitung += hariTerlambat * 5000
+        } else if (parseInt(bulan) == parseInt(expired[0]) && parseInt(tanggal) > parseInt(expired[1])) {
+
+            hariTerlambat += parseInt(tanggal) - parseInt(expired[1])
+            hitung += hariTerlambat * 5000
         }
         console.log(expired);
         console.log(parseInt(hariTerlambat));
@@ -109,15 +140,15 @@ class Transaksi extends Component {
         let tanggal = tgl.getDate();
         let bulan = tgl.getMonth();
         let tahun = tgl.getFullYear();
-        let expired = this.state.expired_date.split('-')
+        let expired = this.state.expired_date.split('/')
         console.log(expired)
-        if (parseInt(bulan) > parseInt(expired[1])) {
-            hitung += (parseInt(expired[1]) - parseInt(bulan)) * 5000 * 30
-            hariTerlambat += (parseInt(expired[1]) - parseInt(bulan)) * 30
+        if (parseInt(bulan) > parseInt(expired[0])) {
+            hitung += (parseInt(expired[0]) - parseInt(bulan)) * 5000 * 30
+            hariTerlambat += (parseInt(expired[0]) - parseInt(bulan)) * 30
         }
-        if (parseInt(tanggal) > parseInt(expired[2])) {
-            hitung += (parseInt(expired[2]) - parseInt(tanggal)) * 5000
-            hariTerlambat += parseInt(expired[2]) - parseInt(tanggal)
+        if (parseInt(tanggal) > parseInt(expired[1])) {
+            hitung += (parseInt(expired[1]) - parseInt(tanggal)) * 5000
+            hariTerlambat += parseInt(expired[1]) - parseInt(tanggal)
         }
 
         this.setState({
@@ -127,8 +158,8 @@ class Transaksi extends Component {
 
         return hitung
     }
-    componentDidMount() {
-        this.props.dispatch(getAllborrow({
+    showBooksTrans = async () => {
+        await this.props.dispatch(getAllborrow({
             "authorization": "jangan-coba-coba",
             "x-access-token": "bearer " + this.props.token,
             "x-control-user": this.props.id_user
@@ -140,16 +171,19 @@ class Transaksi extends Component {
                 })
             })
     }
+    componentDidMount() {
+        this.showBooksTrans()
+    }
 
     render() {
-        console.log(this.state.transaksiBuku)
-        let tgl_sekarang = new Date()
-        let aturTanggal = (tgl) => {
-            let tglarr = tgl.split('-')
-            tglarr.reverse()
-            return tglarr.join('-')
+        // console.log(this.state.transaksiBuku)
+        // let tgl_sekarang = new Date()
+        // let aturTanggal = (tgl) => {
+        //     let tglarr = tgl.split('-')
+        //     tglarr.reverse()
+        //     return tglarr.join('-')
 
-        }
+        // }
         let no = 1;
         const tampilkanBuku = this.state.transaksiBuku.map((item) => {
             if (item.information == "DIPINJAM") {
@@ -160,7 +194,7 @@ class Transaksi extends Component {
                         <td scope="col">{item.name}</td>
                         <td scope="col">{item.title}</td>
                         <td scope="col">{item.writer}</td>
-                        <td scope="col">{aturTanggal(item.expired_date)}</td>
+                        <td scope="col">{item.expired_date}</td>
                         <td scope="col"><img src={item.image} alt={item.title} width="70px" /></td>
                         <td scope="col"><button className="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg" onClick={() => this.prosesPengembalian(item.id_loanbook)}>Proses</button></td>
                     </tr>
@@ -287,7 +321,7 @@ class Transaksi extends Component {
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                    <a href="/transaksi" class="btn btn-primary" onClick={this.updatePengembalian} data-dismiss="modal">Proses Pengembalian</a>
+                                    <a href="/transaksi" class="btn btn-primary" onClick={this.updateBorrow} data-dismiss="modal">Proses Pengembalian</a>
 
                                 </div>
                             </div>
