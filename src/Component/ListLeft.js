@@ -14,7 +14,7 @@ let ListLeft = () => {
 
                 <Link to="#" class="list-group-item list-group-item-action disabled bg-primary text-white active font-weight-bold">
                     Menu Confirm </Link>
-                <Link to="confirmborrow" class="list-group-item list-group-item-action">Confirm Borrow</Link>
+                <Link to="Confirmborrow" class="list-group-item list-group-item-action">Confirm Borrow</Link>
 
                 <Link to="#" class="list-group-item list-group-item-action disabled bg-primary text-white active font-weight-bold">
                     Registrasi </Link>

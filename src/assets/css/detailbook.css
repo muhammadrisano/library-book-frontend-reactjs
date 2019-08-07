@@ -1,0 +1,11 @@
+.buttom-empty{
+    height: 50px;
+    background-color: rgba(199, 19, 19, 0.7);
+    font-size: 17px;
+    color: white;
+    text-align: center;
+    line-height: 50px;
+    margin-top: -80px;
+    position: relative;
+    
+}
