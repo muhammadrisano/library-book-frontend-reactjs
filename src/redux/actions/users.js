@@ -3,7 +3,7 @@ import axios from 'axios';
 export const loginUser = (data) => {
     return {
         type: 'LOGIN_USER',
-        payload: axios.post(`http://localhost:4000/user/login`, data, {
+        payload: axios.post(`http://libraryapi.muhammadrisano.online/user/login`, data, {
             headers: { "authorization": "jangan-coba-coba" },
         }),
     };
@@ -12,7 +12,7 @@ export const loginUser = (data) => {
 export const getUser = (data, header) => {
     return {
         type: 'GET_USER',
-        payload: axios.get(`http://localhost:4000/user?search=` + data, {
+        payload: axios.get(`http://libraryapi.muhammadrisano.online/user?search=` + data, {
             headers: header
         }),
     };
@@ -21,7 +21,7 @@ export const getUser = (data, header) => {
 export const getuserid = (id_user, header) => {
     return {
         type: 'GET_USER_ID',
-        payload: axios.get('http://localhost:4000/user/' + id_user, {
+        payload: axios.get('http://libraryapi.muhammadrisano.online/user/' + id_user, {
             headers: header
         })
     }
@@ -30,7 +30,7 @@ export const getuserid = (id_user, header) => {
 export const updateuser = (id_user, data, header) => {
     return {
         type: 'UPDATE_USER',
-        payload: axios.patch('http://localhost:4000/user/' + id_user, data, {
+        payload: axios.patch('http://libraryapi.muhammadrisano.online/user/' + id_user, data, {
             headers: header
         })
     }
