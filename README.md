@@ -7,13 +7,15 @@ Library App using React &amp; Redux
 
 ## Installation
 ### Clone
-```
 - Frontend
+```
 $ git clone https://github.com/muhammadrisano/library-book-frontend-reactjs.git
 $ cd library-book-frontend-reactjs
 $ npm install
 $ npm start
+```
 - Backend
+```
 $ git clone https://github.com/muhammadrisano/Library-book-backend-expressjs.git
 $ cd Library-book-backend-expressjs
 $ npm install
