@@ -8,11 +8,16 @@ Library App using React &amp; Redux
 ## Installation
 ### Clone
 ```
-$ git clone https://github.com/khusnijafar/LibraryApp
-$ cd library-client
+- Frontend
+$ git clone https://github.com/muhammadrisano/library-book-frontend-reactjs.git
+$ cd library-book-frontend-reactjs
 $ npm install
-$ cd library-server
+$ npm start
+- Backend
+$ git clone https://github.com/muhammadrisano/Library-book-backend-expressjs.git
+$ cd Library-book-backend-expressjs
 $ npm install
+$ npm start
 ```
 
 
@@ -23,8 +28,8 @@ create a database and make sure the collection name and document accordance data
 
 ### Start Development Server
 ```
-$ npm start (client side)
-$ npm start (server side)
+$ npm start (Frontend)
+$ npm start (Backend)
 ```
 
 
