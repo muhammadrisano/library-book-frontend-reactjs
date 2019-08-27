@@ -37,4 +37,4 @@ $ npm start (Backend)
 
 ## Demo
 
-![home](/library-client/public/images/library-home.png)
+<img src="src/assets/images/git/libraribook.png"/>
