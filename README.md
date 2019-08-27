@@ -3,7 +3,7 @@ Library App using React &amp; Redux
 
 ## Prerequiste
 - Node.js - Download and Install [Node.js](https://nodejs.org/en/) with [NVM](https://github.com/creationix/nvm) (Node Version Manager) - Simple bash script to manage multiple active node.js versions.
-- MongoDB - Download and Install [MongoDB](https://www.mongodb.com/) - Make sure it's running on the default port.  
+- MySQL - Download and Install [MySQL](https://www.mysql.com/downloads/) - Make sure it's running on the default port.  
 
 ## Installation
 ### Clone
