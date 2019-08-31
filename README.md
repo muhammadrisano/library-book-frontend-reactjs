@@ -38,11 +38,13 @@
 
 ## Screenshots
 <div align="center">
-    <img width="250" src="./src/assets/Screenshot from 2019-08-31 08-39-46.png">
-    <img width="250" src="./src/assets/Screenshot from 2019-08-31 08-41-08.png">
-    <img width="250" src="./src/assets/Screenshot from 2019-08-31 08-42-05.png">
-    <img width="250" src="./src/assets/Screenshot from 2019-08-31 08-43-52.png">
-    <img width="250" src="./src/assets/Screenshot from 2019-08-31 08-44-19.png">
+<img width="250" src="./src/assets/images/git/libraribook.png">
+  <img width="250" src="./src/assets/images/git/login.png">
+  <img width="250" src="./src/assets/images/git/borrow.png">
+  <img width="250" src="./src/assets/images/git/borrowuser.png">
+  <img width="250" src="./src/assets/images/git/caribuku.png">
+    <img width="250" src="./src/assets/images/git/donete.png">
+  <img width="250" src="./src/assets/images/git/adminis.png">
 </div>
 
 ## Release Web
