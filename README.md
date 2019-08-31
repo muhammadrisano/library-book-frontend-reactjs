@@ -49,7 +49,7 @@
 </div>
 
 ## Release Web
-[Risano Library](httt://library.muhammadrisano.online)
+[Risano Library](http://library.muhammadrisano.online)
 
 ## Contributors
 <center>
