@@ -10,8 +10,7 @@
 - [Requirements](#requirements)
 - [Usage](#usage-for-development)
 - [Screenshots](#screenshots)
-- [Release Web](#release-apk)
-- [Related Project](#related-project-backend)
+- [Release Web](#release-web)
 - [Contributors](#contributors)
 
 ## Introduction
