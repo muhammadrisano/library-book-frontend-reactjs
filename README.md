@@ -32,9 +32,10 @@
 
 ## Usage for development
 1. Open your terminal or command prompt
-2. Type `git clone https://github.com/muhammadrisano/library-book-frontend-reactjs.git`
-3. Open the folder and type `npm install` for install dependencies
-4. Type `npm start` for run this app.
+2. prepare a Backend
+3. Type `git clone https://github.com/muhammadrisano/library-book-frontend-reactjs.git`
+4. Open the folder and type `npm install` for install dependencies
+5. Type `npm start` for run this app.
 
 ## Screenshots
 <div align="center">
