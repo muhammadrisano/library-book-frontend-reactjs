@@ -28,6 +28,7 @@
 ## Requirements
 * [`npm`](https://www.npmjs.com/get-npm)
 * [`reactjs`](https://reactjs.org/docs/getting-started.html)
+* [`Backend`](https://github.com/muhammadrisano/Library-book-backend-expressjs)
 
 ## Usage for development
 1. Open your terminal or command prompt
@@ -54,7 +55,7 @@
       <td align="center">
         <a href="https://github.com/muhammadrisano/">
           <img width="100" src="https://avatars3.githubusercontent.com/u/47690080?s=460&v=4" alt="Muhammad Risano Akbar"><br/>
-          <sub><b>Falih Naufal</b></sub>
+          <sub><b>Muhammad Risano Akbar</b></sub>
         </a>
       </td>
     </tr>
