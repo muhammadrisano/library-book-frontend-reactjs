@@ -49,7 +49,7 @@
 </div>
 
 ## Release Web
-[Risano Library](https://libraryku.netlify.com/)
+[Risano Library](httt://library.muhammadrisano.online)
 
 ## Contributors
 <center>
