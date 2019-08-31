@@ -10,47 +10,53 @@
 - [Requirements](#requirements)
 - [Usage](#usage-for-development)
 - [Screenshots](#screenshots)
-- [Release APK](#release-apk)
+- [Release Web](#release-apk)
 - [Related Project](#related-project-backend)
 - [Contributors](#contributors)
 
 ## Introduction
-`Risano Library`Book is an online library website with roles as guests, customers and librarians
+**Risano Library** Book is an online library website with roles as guests, customers and librarians
 
-## Prerequiste
-- Node.js - Download and Install [Node.js](https://nodejs.org/en/) with [NVM](https://github.com/creationix/nvm) (Node Version Manager) - Simple bash script to manage multiple active node.js versions.
-- MySQL - Download and Install [MySQL](https://www.mysql.com/downloads/) - Make sure it's running on the default port.  
+## Features
+* guests can only see the books that are available
+* Users can loan some books
+* Users can see the loan history
+* Users can loan some books
+* Donate Book
+* And others
 
-## Installation
-### Clone
-- Frontend
-```
-$ git clone https://github.com/muhammadrisano/library-book-frontend-reactjs.git
-$ cd library-book-frontend-reactjs
-$ npm install
-$ npm start
-```
-- Backend
-```
-$ git clone https://github.com/muhammadrisano/Library-book-backend-expressjs.git
-$ cd Library-book-backend-expressjs
-$ npm install
-$ npm start
-```
+## Requirements
+* [`npm`](https://www.npmjs.com/get-npm)
+* [`reactjs`](https://reactjs.org/docs/getting-started.html)
 
+## Usage for development
+1. Open your terminal or command prompt
+2. Type `git clone https://github.com/muhammadrisano/library-book-frontend-reactjs.git`
+3. Open the folder and type `npm install` for install dependencies
+4. Type `npm start` for run this app.
 
-### Create Environment Variable
-```
-create a database and make sure the collection name and document accordance data on file models but you can modify as you want
-```
+## Screenshots
+<div align="center">
+    <img width="250" src="./src/assets/Screenshot from 2019-08-31 08-39-46.png">
+    <img width="250" src="./src/assets/Screenshot from 2019-08-31 08-41-08.png">
+    <img width="250" src="./src/assets/Screenshot from 2019-08-31 08-42-05.png">
+    <img width="250" src="./src/assets/Screenshot from 2019-08-31 08-43-52.png">
+    <img width="250" src="./src/assets/Screenshot from 2019-08-31 08-44-19.png">
+</div>
 
-### Start Development Server
-```
-$ npm start (Frontend)
-$ npm start (Backend)
-```
+## Release Web
+[![Netlify Status](https://api.netlify.com/api/v1/badges/85e33a03-d82a-4947-8b71-f38561c69149/deploy-status)](https://libraryku.netlify.com/)
 
-
-## Demo
-
-<img src="src/assets/images/git/libraribook.png"/>
+## Contributors
+<center>
+  <table>
+    <tr>
+      <td align="center">
+        <a href="https://github.com/muhammadrisano/">
+          <img width="100" src="https://avatars3.githubusercontent.com/u/47690080?s=460&v=4" alt="Muhammad Risano Akbar"><br/>
+          <sub><b>Falih Naufal</b></sub>
+        </a>
+      </td>
+    </tr>
+  </table>
+</center>
