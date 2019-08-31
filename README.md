@@ -49,7 +49,7 @@
 </div>
 
 ## Release Web
-[![Netlify Status](https://api.netlify.com/api/v1/badges/85e33a03-d82a-4947-8b71-f38561c69149/deploy-status)](https://libraryku.netlify.com/)
+[Risano Library](https://libraryku.netlify.com/)
 
 ## Contributors
 <center>
