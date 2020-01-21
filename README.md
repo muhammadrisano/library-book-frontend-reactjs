@@ -50,16 +50,4 @@
 ## Release Web
 [Risano Library](http://library.muhammadrisano.online)
 
-## Contributors
-<center>
-  <table>
-    <tr>
-      <td align="center">
-        <a href="https://github.com/muhammadrisano/">
-          <img width="100" src="https://avatars3.githubusercontent.com/u/47690080?s=460&v=4" alt="Muhammad Risano Akbar"><br/>
-          <sub><b>Muhammad Risano Akbar</b></sub>
-        </a>
-      </td>
-    </tr>
-  </table>
-</center>
+
